@@ -9,12 +9,18 @@ By Tanja & Sandra
 
 ## Features
 - [ ] Introduction to app for the user
-  - [ ] optional: login/register
-- [ ] Show list of main categories/options
-  - [ ] user can select categories
-  - [ ] each category consists of several subcategories (invisible to user)
+  - [ ] what does this app do (why and what)
+  - [ ] explaination on how to use the app
+- [ ] Show list of main categories to choose
+  - [ ] user can select categories (no limit)
+  - [ ] if no category has been selected, categories will be chosen randomly
+  - [ ] some categories consist of subcategories (e.g.: "theme" -> "animal" -> "insect")
 - [ ] Randomly generate suggestion of what user should draw
-  - [ ] user can generate individual or all results again
-  - [ ] if user "accepts challenge", challenge with its parameter will be saved in user account
+  - [ ] show results for every chosen category
+  - [ ] user can re-generate an individual result or all results
+  - [ ] user can "accept challenge"
+- [ ] Optional: User profile/account
+  - [ ] login/register ui on main page
+  - [ ] if user "accepts challenge", challenge with its parameters will be saved to user profile
+  - [ ] list all challeges with filters (all, done, open)
   - [ ] user can set a challenge to be completed
-    - [ ] optional: user can upload drawn pictures challenges accordingly
