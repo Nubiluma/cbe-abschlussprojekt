@@ -8,28 +8,15 @@
     <span class="how-to-step-icon">2</span>
     <span class="how-to-step-icon">3</span>
     <span class="how-to-text"
-      >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda,
-      ducimus?</span
+      >Wähle die Kategorien aus, die der Zufallsgenerator berücksichtigen
+      soll</span
     >
     <span class="how-to-text"
-      >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, odit
-      ab.</span
+      >Klicke auf "Generieren", damit du deine Challenge erhältst</span
     >
     <span class="how-to-text"
-      >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt omnis
-      voluptates eveniet?</span
-    >
-    <span class="how-to-explainations"
-      >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      mollitia ipsum eius.</span
-    >
-    <span class="how-to-explainations"
-      >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      mollitia ipsum eius.</span
-    >
-    <span class="how-to-explainations"
-      >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      mollitia ipsum eius.</span
+      >Nimm die Challenge an, wenn sie dir gefällt, oder würfele die Ergebnisse
+      neu</span
     >
   </div>
 </template>
@@ -76,17 +63,6 @@ export default {
 .how-to-text {
   width: 45ch;
   margin-top: 1rem;
-}
-
-.how-to-explainations {
-  margin-top: 4rem;
-  padding: 1rem;
-  background-color: var(--clr-white);
-  border-radius: 1rem;
-  box-shadow: 0.25rem 0.25rem 0.5rem var(--shadow-clr);
-  width: 35rem;
-  height: 8rem;
-  font-size: 1.5rem;
 }
 
 .how-to-images {

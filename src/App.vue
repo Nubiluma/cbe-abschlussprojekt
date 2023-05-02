@@ -22,6 +22,14 @@
     <section class="how-to-section">
       <HowTo></HowTo>
     </section>
+    <div class="how-to-tip">
+      <span class="how-to-tip-text">
+        Gefallen dir die Ergebnisse nicht, kannst du entweder einzelne oder alle
+        neu generieren lassen. Klicke auf die Würfel neben dem Ergebnis, um es
+        einzeln neu zu generieren!
+      </span>
+      <img src="@/assets/idea.png" class="how-to-tip-img" />
+    </div>
     <section class="generator-section"></section>
   </main>
   <footer>By Tanja & Sandra</footer>
@@ -97,9 +105,36 @@ body {
 }
 
 .how-to-section {
-  padding-block: 10rem;
-  background: url("@/assets/paint-stroke-background.png") no-repeat center 80%;
+  margin-block: 5rem;
+  padding-bottom: 20rem;
+  background: url("@/assets/paint-stroke-background.png") no-repeat center
+    bottom;
   background-size: contain;
+}
+
+/** not yet implemented */
+.how-to-tip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem;
+  margin-left: auto;
+  font-size: 2rem;
+  width: 50rem;
+
+  display: none;
+}
+
+.how-to-tip-text {
+  background-color: var(--clr-white);
+  box-shadow: 0.2rem 0.2rem 0.5rem var(--shadow-clr);
+  text-align: center;
+  padding: 1rem;
+}
+
+.how-to-tip-img {
+  width: 8rem;
 }
 
 section {
