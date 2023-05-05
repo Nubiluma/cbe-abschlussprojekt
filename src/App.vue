@@ -19,10 +19,29 @@
         <button class="login-btn">Anmelden</button>
       </form>
     </section>
+    <section class="how-to-section">
+      <HowTo></HowTo>
+    </section>
+    <div class="how-to-tip">
+      <span class="how-to-tip-text">
+        Gefallen dir die Ergebnisse nicht, kannst du entweder einzelne oder alle
+        neu generieren lassen. Klicke auf die Würfel neben dem Ergebnis, um es
+        einzeln neu zu generieren!
+      </span>
+      <img src="@/assets/idea.png" class="how-to-tip-img" />
+    </div>
     <section class="generator-section"></section>
   </main>
   <footer>By Tanja & Sandra</footer>
 </template>
+
+<script>
+import HowTo from "@/components/HowTo.vue";
+
+export default {
+  components: { HowTo },
+};
+</script>
 
 <style>
 *,
@@ -44,6 +63,7 @@ html {
   --clr-purple02: #bfb0ff;
   --clr-yellow: #ffc107;
   --clr-white: #ffffff;
+  --shadow-clr: #535353;
 }
 
 body {
@@ -84,8 +104,41 @@ body {
   flex-direction: column;
 }
 
+.how-to-section {
+  margin-block: 5rem;
+  padding-bottom: 20rem;
+  background: url("@/assets/paint-stroke-background.png") no-repeat center
+    bottom;
+  background-size: contain;
+}
+
+/** not yet implemented */
+.how-to-tip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem;
+  margin-left: auto;
+  font-size: 2rem;
+  width: 50rem;
+
+  display: none;
+}
+
+.how-to-tip-text {
+  background-color: var(--clr-white);
+  box-shadow: 0.2rem 0.2rem 0.5rem var(--shadow-clr);
+  text-align: center;
+  padding: 1rem;
+}
+
+.how-to-tip-img {
+  width: 8rem;
+}
+
 section {
-  margin-bottom: 5rem;
+  margin-bottom: 15rem;
 }
 
 footer {
