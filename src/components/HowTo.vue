@@ -1,9 +1,9 @@
 <template>
   <h2 class="how-to-header">So verwendest du die App</h2>
   <div class="how-to-container">
-    <img src="@/assets/checklist-transparent.png" class="how-to-images" />
-    <img src="@/assets/dice-transparent.png" class="how-to-images" />
-    <img src="@/assets/creativity-transparent.png" class="how-to-images" />
+    <img src="checklist-transparent.png" class="how-to-images" />
+    <img src="dice-transparent.png" class="how-to-images" />
+    <img src="creativity-transparent.png" class="how-to-images" />
     <span class="how-to-step-icon">1</span>
     <span class="how-to-step-icon">2</span>
     <span class="how-to-step-icon">3</span>
@@ -21,21 +21,13 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "HowTo",
-};
+<script setup>
+// export default {
+//   name: "HowTo",
+// };
 </script>
 
 <style scoped>
-:root {
-  --clr-purple01: #6949ff;
-  --clr-purple02: #bfb0ff;
-  --clr-yellow: #ffc107;
-  --clr-white: #ffffff;
-  --shadow-clr: #535353;
-}
-
 .how-to-header {
   font-size: 4rem;
   margin-left: 2rem;

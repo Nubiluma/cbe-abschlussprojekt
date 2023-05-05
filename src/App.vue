@@ -6,7 +6,7 @@
     <section>
       <div class="slides">
         <div class="current-slide">
-          <img src="@/assets/slide-1.png" class="current-slide-img" />
+          <img src="slide-1.png" class="current-slide-img" />
           <p class="current-slide-text">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas
             officiis voluptatem ut eaque omnis quaerat?
@@ -28,125 +28,15 @@
         neu generieren lassen. Klicke auf die Würfel neben dem Ergebnis, um es
         einzeln neu zu generieren!
       </span>
-      <img src="@/assets/idea.png" class="how-to-tip-img" />
+      <img src="idea.png" class="how-to-tip-img" />
     </div>
     <section class="generator-section"></section>
   </main>
   <footer>By Tanja & Sandra</footer>
 </template>
 
-<script>
-import HowTo from "@/components/HowTo.vue";
-
-export default {
-  components: { HowTo },
-};
+<script setup>
+import HowTo from "./components/HowTo.vue";
 </script>
 
-<style>
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-html {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  font-size: 10px;
-  height: 100%;
-}
-
-:root {
-  --clr-purple01: #6949ff;
-  --clr-purple02: #bfb0ff;
-  --clr-yellow: #ffc107;
-  --clr-white: #ffffff;
-  --shadow-clr: #535353;
-}
-
-body {
-  margin: 0;
-  height: 100%;
-}
-</style>
-
-<style scoped>
-.app-name {
-  text-align: center;
-  font-size: 5rem;
-}
-
-.slides {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-size: 2rem;
-}
-
-.current-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.current-slide-img {
-  width: 15rem;
-  height: 15rem;
-}
-
-.login-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.how-to-section {
-  margin-block: 5rem;
-  padding-bottom: 20rem;
-  background: url("@/assets/paint-stroke-background.png") no-repeat center
-    bottom;
-  background-size: contain;
-}
-
-/** not yet implemented */
-.how-to-tip {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin: 3rem;
-  margin-left: auto;
-  font-size: 2rem;
-  width: 50rem;
-
-  display: none;
-}
-
-.how-to-tip-text {
-  background-color: var(--clr-white);
-  box-shadow: 0.2rem 0.2rem 0.5rem var(--shadow-clr);
-  text-align: center;
-  padding: 1rem;
-}
-
-.how-to-tip-img {
-  width: 8rem;
-}
-
-section {
-  margin-bottom: 15rem;
-}
-
-footer {
-  height: 5rem;
-  width: 100%;
-  text-align: center;
-  font-size: 2rem;
-  background-color: var(--clr-purple01);
-  color: var(--clr-white);
-}
-</style>
+<style></style>
