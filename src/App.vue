@@ -22,6 +22,9 @@
     <section class="how-to-section">
       <HowTo></HowTo>
     </section>
+    <section class="generator-section">
+      <Generator></Generator>
+    </section>
     <div class="how-to-tip">
       <span class="how-to-tip-text">
         Gefallen dir die Ergebnisse nicht, kannst du entweder einzelne oder alle
@@ -30,13 +33,13 @@
       </span>
       <img src="idea.png" class="how-to-tip-img" />
     </div>
-    <section class="generator-section"></section>
   </main>
   <footer>By Tanja & Sandra</footer>
 </template>
 
 <script setup>
 import HowTo from "./components/HowTo.vue";
+import Generator from "./components/Generator.vue";
 </script>
 
 <style></style>
