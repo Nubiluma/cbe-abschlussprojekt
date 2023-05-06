@@ -1,7 +1,40 @@
 <template>
   <h2>What should I draw?</h2>
-  <div class="settings"></div>
-  <div class="generator-wrapper">
+  <section class="settings-section">
+    <details>
+      <summary>
+        <span class="medium-text"> Klicke, um deine Materialien zu wählen</span>
+      </summary>
+      <div class="medium-selection">
+        <div class="medium-checkbox-container">
+          <input class="mediums-checkbox" type="checkbox" id="medium-canvas" />
+          <label class="mediums-label" for="medium-canvas">Leinwand</label>
+        </div>
+        <div class="medium-checkbox-container">
+          <input class="mediums-checkbox" type="checkbox" id="medium-paper" />
+          <label class="mediums-label" for="medium-paper">Papier</label>
+        </div>
+        <div class="medium-checkbox-container">
+          <input
+            class="mediums-checkbox"
+            type="checkbox"
+            id="medium-water-colors"
+          />
+          <label class="mediums-label" for="medium-water-colors"
+            >Aquarell-Papier</label
+          >
+        </div>
+        <div class="medium-checkbox-container">
+          <input class="mediums-checkbox" type="checkbox" id="medium-digital" />
+          <label class="mediums-label" for="medium-digital"
+            >Digitales Medium</label
+          >
+        </div>
+      </div>
+    </details>
+    <div class="tools-selection"></div>
+  </section>
+  <section class="generator-wrapper">
     <div class="categories-container">
       <span class="category-icon style-category"><p>Stil</p></span>
       <span class="category-icon theme-category"><p>Thema</p></span>
@@ -18,15 +51,56 @@
         <button class="generate-btn">Generieren</button>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
 h2 {
   font-size: 5rem;
   text-align: center;
-  margin-block: 2rem 12rem;
+  margin-block: 3rem 6rem;
 }
+
+details {
+  font-size: 3rem;
+  color: var(--clr-purple01);
+}
+
+.settings-section {
+  margin-block: 5rem;
+  padding: 1rem 8rem;
+  _background-color: var(--clr-light-grey);
+}
+.medium-selection {
+  margin-block: 4rem 2rem;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 3rem;
+}
+.medium-text {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: black;
+}
+.medium-checkbox-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.mediums-checkbox {
+  width: 2rem;
+  height: 2rem;
+}
+
+.mediums-label {
+  font-size: 2rem;
+  color: black;
+}
+
 .generator-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
