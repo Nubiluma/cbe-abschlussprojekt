@@ -1,11 +1,11 @@
 <template>
   <h2>What should I draw?</h2>
-  <section class="settings-section">
-    <Settings
+  <section class="selection-section">
+    <MaterialSelection
       title="Ausklappen, um deine gewünschten Materialien zu wählen"
-      :media="settingsMedium"
-      :tools="settingsTools"
-    ></Settings>
+      :media="selectionMedium"
+      :tools="selectionTools"
+    ></MaterialSelection>
   </section>
   <section class="generator-wrapper">
     <div class="categories-container">
@@ -28,16 +28,16 @@
 </template>
 
 <script setup>
-import Settings from "./Settings.vue";
+import MaterialSelection from "./MaterialSelection.vue";
 
-const settingsMedium = [
+const selectionMedium = [
   { text: "Leinwand", id: "canvas" },
   { text: "Papier", id: "paper" },
   { text: "Aquarell-Papier", id: "aquarel-paper" },
   { text: "Digitales Medium", id: "digital" },
 ];
 
-const settingsTools = [
+const selectionTools = [
   { text: "Bleistift", id: "pencil" },
   { text: "Buntstifte", id: "crayon" },
   { text: "Marker", id: "marker" },
@@ -61,7 +61,7 @@ details {
   color: var(--clr-purple01);
 }
 
-.settings-section {
+.selection-section {
   margin-block: 5rem;
   padding: 1rem 8rem;
 }
