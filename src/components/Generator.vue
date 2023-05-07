@@ -1,59 +1,11 @@
 <template>
   <h2>What should I draw?</h2>
   <section class="settings-section">
-    <details>
-      <summary>
-        <span class="medium-text">
-          Ausklappen, um deine gewünschten Materialien zu wählen</span
-        >
-      </summary>
-      <div class="medium-selection">
-        <div class="medium-checkbox-container">
-          <input class="mediums-checkbox" type="checkbox" id="medium-canvas" />
-          <label class="mediums-label" for="medium-canvas">Leinwand</label>
-        </div>
-        <div class="medium-checkbox-container">
-          <input class="mediums-checkbox" type="checkbox" id="medium-paper" />
-          <label class="mediums-label" for="medium-paper">Papier</label>
-        </div>
-        <div class="medium-checkbox-container">
-          <input
-            class="mediums-checkbox"
-            type="checkbox"
-            id="medium-water-colors"
-          />
-          <label class="mediums-label" for="medium-water-colors"
-            >Aquarell-Papier</label
-          >
-        </div>
-        <div class="medium-checkbox-container">
-          <input class="mediums-checkbox" type="checkbox" id="medium-digital" />
-          <label class="mediums-label" for="medium-digital"
-            >Digitales Medium</label
-          >
-        </div>
-      </div>
-      <div class="medium-selection">
-        <div class="medium-checkbox-container">
-          <input class="mediums-checkbox" type="checkbox" id="medium-pencil" />
-          <label class="mediums-label" for="medium-pencil">Bleistift</label>
-        </div>
-        <div class="medium-checkbox-container">
-          <input
-            class="mediums-checkbox"
-            type="checkbox"
-            id="medium-colored-pencil"
-          />
-          <label class="mediums-label" for="medium-colored-pencil"
-            >Bunstift</label
-          >
-        </div>
-        <div class="medium-checkbox-container">
-          <input class="mediums-checkbox" type="checkbox" id="medium-marker" />
-          <label class="mediums-label" for="medium-marker">Filzstift</label>
-        </div>
-      </div>
-    </details>
+    <Settings
+      title="Ausklappen, um deine gewünschten Materialien zu wählen"
+      :media="settingsMedium"
+      :tools="settingsTools"
+    ></Settings>
   </section>
   <section class="generator-wrapper">
     <div class="categories-container">
@@ -75,6 +27,28 @@
   </section>
 </template>
 
+<script setup>
+import Settings from "./Settings.vue";
+
+const settingsMedium = [
+  { text: "Leinwand", id: "canvas" },
+  { text: "Papier", id: "paper" },
+  { text: "Aquarell-Papier", id: "aquarel-paper" },
+  { text: "Digitales Medium", id: "digital" },
+];
+
+const settingsTools = [
+  { text: "Bleistift", id: "pencil" },
+  { text: "Buntstifte", id: "crayon" },
+  { text: "Marker", id: "marker" },
+  { text: "Borstenpinsel", id: "brush" },
+  { text: "Aquarellpinsel", id: "aquarel-brush" },
+  { text: "Kohlestift", id: "coal-pencil" },
+  { text: "Spachtel", id: "spatula" },
+  { text: "Schwamm", id: "sponge" },
+];
+</script>
+
 <style scoped>
 h2 {
   font-size: 5rem;
@@ -90,35 +64,6 @@ details {
 .settings-section {
   margin-block: 5rem;
   padding: 1rem 8rem;
-}
-.medium-selection {
-  margin-block: 4rem 2rem;
-
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 3rem;
-}
-.medium-text {
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  color: black;
-}
-.medium-checkbox-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-.mediums-checkbox {
-  width: 2rem;
-  height: 2rem;
-}
-
-.mediums-label {
-  font-size: 2rem;
-  color: black;
 }
 
 .generator-wrapper {
