@@ -3,7 +3,9 @@
   <section class="settings-section">
     <details>
       <summary>
-        <span class="medium-text"> Klicke, um deine Materialien zu wählen</span>
+        <span class="medium-text">
+          Ausklappen, um deine gewünschten Materialien zu wählen</span
+        >
       </summary>
       <div class="medium-selection">
         <div class="medium-checkbox-container">
@@ -31,8 +33,27 @@
           >
         </div>
       </div>
+      <div class="medium-selection">
+        <div class="medium-checkbox-container">
+          <input class="mediums-checkbox" type="checkbox" id="medium-pencil" />
+          <label class="mediums-label" for="medium-pencil">Bleistift</label>
+        </div>
+        <div class="medium-checkbox-container">
+          <input
+            class="mediums-checkbox"
+            type="checkbox"
+            id="medium-colored-pencil"
+          />
+          <label class="mediums-label" for="medium-colored-pencil"
+            >Bunstift</label
+          >
+        </div>
+        <div class="medium-checkbox-container">
+          <input class="mediums-checkbox" type="checkbox" id="medium-marker" />
+          <label class="mediums-label" for="medium-marker">Filzstift</label>
+        </div>
+      </div>
     </details>
-    <div class="tools-selection"></div>
   </section>
   <section class="generator-wrapper">
     <div class="categories-container">
@@ -69,7 +90,6 @@ details {
 .settings-section {
   margin-block: 5rem;
   padding: 1rem 8rem;
-  _background-color: var(--clr-light-grey);
 }
 .medium-selection {
   margin-block: 4rem 2rem;
@@ -105,7 +125,7 @@ details {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10rem;
-  padding-inline: 5rem;
+  _padding-inline: 5rem;
 }
 
 .categories-container {
@@ -155,6 +175,7 @@ details {
 
 .character-category {
   background-image: url("/character-design-icon.jpg");
+  _filter: brightness(50%);
 }
 
 .result-part {

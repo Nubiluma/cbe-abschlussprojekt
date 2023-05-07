@@ -25,6 +25,7 @@ body {
   margin: 0;
   height: 100%;
 }
+
 .app-name {
   text-align: center;
   font-size: 5rem;
@@ -89,7 +90,12 @@ body {
 }
 
 section {
-  margin-block: 10rem;
+  margin-block: 15rem;
+}
+
+.generator-section {
+  width: 1700px;
+  margin: 0 auto;
 }
 
 footer {
