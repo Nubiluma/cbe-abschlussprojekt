@@ -9,15 +9,15 @@
   </section>
   <section class="generator-wrapper">
     <div class="categories-container">
-      <span class="category-icon style-category"><p>Stil</p></span>
-      <span class="category-icon theme-category"><p>Thema</p></span>
-      <span class="category-icon genre-category"><p>Genre</p></span>
-      <span class="category-icon technique-category"><p>Technik</p></span>
-      <span class="category-icon coloration-category"><p>Farbgebung</p></span>
-      <span class="category-icon character-category"
-        ><p>Character-Design</p></span
-      >
+      <Card
+        v-for="category in categories"
+        :key="category"
+        :title="category.text"
+        :image="category.image"
+        :id="category.id"
+      ></Card>
     </div>
+
     <div class="result-part">
       <div class="challenge-text-container"></div>
       <div class="buttons-container">
@@ -29,6 +29,20 @@
 
 <script setup>
 import MaterialSelection from "./MaterialSelection.vue";
+import Card from "./Card.vue";
+
+const categories = [
+  { text: "Stil", image: "/style-icon.png", id: "style" },
+  { text: "Thema", image: "/theme-icon.jpg", id: "theme" },
+  { text: "Genre", image: "/genre-icon.jpg", id: "genre" },
+  { text: "Technik", image: "/technique-icon.jpg", id: "technique" },
+  { text: "Farbgebung", image: "/coloration-icon.jpg", id: "coloration" },
+  {
+    text: "Character-Design",
+    image: "/character-design-icon.jpg",
+    id: "character-design",
+  },
+];
 
 const selectionMedium = [
   { text: "Leinwand", id: "canvas" },
@@ -51,9 +65,10 @@ const selectionTools = [
 
 <style scoped>
 h2 {
-  font-size: 5rem;
+  font-size: 7rem;
   text-align: center;
   margin-block: 3rem 6rem;
+  letter-spacing: 0.5rem;
 }
 
 details {
@@ -62,7 +77,7 @@ details {
 }
 
 .selection-section {
-  margin-block: 5rem;
+  margin-block: 4rem;
   padding: 1rem 8rem;
 }
 
@@ -70,7 +85,6 @@ details {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10rem;
-  _padding-inline: 5rem;
 }
 
 .categories-container {
@@ -79,48 +93,6 @@ details {
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
   margin-inline: auto;
-}
-
-.category-icon {
-  display: flex;
-  justify-content: start;
-  align-items: end;
-  background-size: cover;
-  border-radius: 7%;
-  width: 28rem;
-  height: 20rem;
-}
-
-.category-icon p {
-  margin-left: 2rem;
-  margin-bottom: 1rem;
-  color: var(--clr-white);
-  font-size: 4rem;
-}
-
-.style-category {
-  background-image: url("/style-icon.png");
-}
-
-.theme-category {
-  background-image: url("/theme-icon.jpg");
-}
-
-.genre-category {
-  background-image: url("/genre-icon.jpg");
-}
-
-.technique-category {
-  background-image: url("/technique-icon.jpg");
-}
-
-.coloration-category {
-  background-image: url("/coloration-icon.jpg");
-}
-
-.character-category {
-  background-image: url("/character-design-icon.jpg");
-  _filter: brightness(50%);
 }
 
 .result-part {
