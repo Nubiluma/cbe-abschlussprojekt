@@ -15,6 +15,7 @@
         :title="category.text"
         :image="category.image"
         :id="category.id"
+        :selected="category.selected"
       ></Card>
     </div>
     <div class="challenge-part">
@@ -69,19 +70,30 @@
 import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 
+//object test content: foo: "bar"
 const generatedChallenge = {};
-//foo: "bar"
 
 const categories = [
-  { text: "Stil", image: "/style-icon.png", id: "style" },
-  { text: "Thema", image: "/theme-icon.jpg", id: "theme" },
-  { text: "Genre", image: "/genre-icon.jpg", id: "genre" },
-  { text: "Technik", image: "/technique-icon.jpg", id: "technique" },
-  { text: "Farbgebung", image: "/coloration-icon.jpg", id: "coloration" },
+  { text: "Stil", image: "/style-icon.png", id: "style", selected: true },
+  { text: "Thema", image: "/theme-icon.jpg", id: "theme", selected: true },
+  { text: "Genre", image: "/genre-icon.jpg", id: "genre", selected: true },
+  {
+    text: "Technik",
+    image: "/technique-icon.jpg",
+    id: "technique",
+    selected: true,
+  },
+  {
+    text: "Farbgebung",
+    image: "/coloration-icon.jpg",
+    id: "coloration",
+    selected: true,
+  },
   {
     text: "Character-Design",
     image: "/character-design-icon.jpg",
     id: "character-design",
+    selected: true,
   },
 ];
 
@@ -170,10 +182,6 @@ details {
   justify-content: space-between;
 }
 
-.challenge-text {
-  _margin-bottom: 1rem;
-}
-
 .buttons-container {
   display: flex;
   flex-direction: column;
@@ -186,14 +194,15 @@ details {
   padding: 2rem;
   border-style: none;
   border-radius: 4rem;
-  font-size: 4rem;
-  width: 45rem;
+  font-size: 3.5rem;
+  width: 42rem;
   cursor: pointer;
 }
 
 .generate-btn {
   background-color: var(--clr-purple01);
   color: var(--clr-white);
+  width: 35rem;
 }
 
 .accept-challenge-btn {
@@ -209,6 +218,6 @@ details {
 }
 
 .back-to-categories {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 </style>
