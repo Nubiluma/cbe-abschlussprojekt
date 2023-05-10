@@ -8,20 +8,78 @@
     ></MaterialSelection>
   </section>
   <section class="generator-wrapper">
-    <div class="categories-container">
+    <div
+      v-if="Object.keys(generatedChallenge).length === 0"
+      class="categories-container"
+    >
       <Card
         v-for="category in categories"
         :key="category"
         :title="category.text"
         :image="category.image"
         :id="category.id"
+        :selected="category.selected"
+        :class="{ 'card-default-styling': selectedCategories.length === 0 }"
       ></Card>
     </div>
-
-    <div class="result-part">
-      <div class="challenge-text-container"></div>
+    <div
+      v-if="Object.keys(generatedChallenge).length > 0"
+      class="categories-container-challenge-view"
+    >
+      <Card
+        v-for="category in selectedCategories"
+        :key="category"
+        :title="category.text"
+        :image="category.image"
+        :id="category.id"
+        :selected="category.selected"
+        :challengeView="Object.keys(generatedChallenge).length > 0"
+        ><p class="challenge-card-item">Lorem ipsum dolor sit.</p></Card
+      >
+    </div>
+    <div class="challenge-part">
+      <div class="challenge-container">
+        <div
+          v-if="Object.keys(generatedChallenge).length > 0"
+          class="challenge-display"
+        >
+          <h3>Challenge:</h3>
+          <div class="challenge-text-container">
+            <p class="challenge-text">Kreiere ein Bild im ... Stil</p>
+            <p class="challenge-text">Male ein/e ...</p>
+            <p class="challenge-text">
+              Male das Bild so, als wäre es aus dem ... Genre
+            </p>
+            <p class="challenge-text">Male mit ...</p>
+            <p class="challenge-text">Verwende die Farbgebung ...</p>
+          </div>
+        </div>
+      </div>
       <div class="buttons-container">
-        <button class="generate-btn">Generieren</button>
+        <button
+          v-if="Object.keys(generatedChallenge).length === 0"
+          class="generate-btn generator-buttons"
+        >
+          Generieren
+        </button>
+        <button
+          v-if="Object.keys(generatedChallenge).length > 0"
+          class="accept-challenge-btn generator-buttons"
+        >
+          Challenge annehmen
+        </button>
+        <button
+          v-if="Object.keys(generatedChallenge).length > 0"
+          class="re-generate-btn generator-buttons"
+        >
+          Alles neu würfeln
+        </button>
+        <p
+          v-if="Object.keys(generatedChallenge).length > 0"
+          class="back-to-categories"
+        >
+          Kategorien neu festlegen ←
+        </p>
       </div>
     </div>
   </section>
@@ -32,15 +90,26 @@ import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 
 const categories = [
-  { text: "Stil", image: "/style-icon.png", id: "style" },
-  { text: "Thema", image: "/theme-icon.jpg", id: "theme" },
-  { text: "Genre", image: "/genre-icon.jpg", id: "genre" },
-  { text: "Technik", image: "/technique-icon.jpg", id: "technique" },
-  { text: "Farbgebung", image: "/coloration-icon.jpg", id: "coloration" },
+  { text: "Stil", image: "/style-icon.png", id: "style", selected: false },
+  { text: "Thema", image: "/theme-icon.jpg", id: "theme", selected: false },
+  { text: "Genre", image: "/genre-icon.jpg", id: "genre", selected: false },
+  {
+    text: "Technik",
+    image: "/technique-icon.jpg",
+    id: "technique",
+    selected: false,
+  },
+  {
+    text: "Farbgebung",
+    image: "/coloration-icon.jpg",
+    id: "coloration",
+    selected: false,
+  },
   {
     text: "Character-Design",
     image: "/character-design-icon.jpg",
     id: "character-design",
+    selected: false,
   },
 ];
 
@@ -61,6 +130,11 @@ const selectionTools = [
   { text: "Spachtel", id: "spatula" },
   { text: "Schwamm", id: "sponge" },
 ];
+
+//object test content: foo: "bar"
+const generatedChallenge = {};
+
+const selectedCategories = categories.filter((c) => c.selected);
 </script>
 
 <style scoped>
@@ -69,6 +143,11 @@ h2 {
   text-align: center;
   margin-block: 3rem 6rem;
   letter-spacing: 0.5rem;
+}
+
+h3 {
+  font-size: 4rem;
+  padding: 2rem 3rem;
 }
 
 details {
@@ -84,7 +163,7 @@ details {
 .generator-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10rem;
+  gap: 8rem;
 }
 
 .categories-container {
@@ -95,24 +174,96 @@ details {
   margin-inline: auto;
 }
 
-.result-part {
+.categories-container-challenge-view {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  align-content: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-inline: auto;
+  margin-bottom: auto;
+}
+
+.challenge-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 700px;
+}
+
+.challenge-container {
+  width: 80%;
+  height: 60%;
+}
+
+.challenge-display {
+  background-color: var(--clr-purple01);
+  color: var(--clr-white);
+  border-radius: 4rem;
+  box-shadow: 1rem 1rem 1rem var(--clr-purple02);
+  min-height: 90%;
+}
+
+.challenge-text-container {
+  margin: 3rem;
+  height: 20rem;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .buttons-container {
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  align-items: start;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
-.generate-btn {
-  padding: 2rem 6rem;
+
+.generator-buttons {
+  padding: 2rem;
   border-style: none;
   border-radius: 4rem;
+  font-size: 3.5rem;
+  width: 42rem;
+  cursor: pointer;
+}
+
+.generate-btn {
   background-color: var(--clr-purple01);
   color: var(--clr-white);
+  width: 35rem;
+}
+
+.accept-challenge-btn {
+  background-color: var(--clr-purple01);
+  box-shadow: 1rem 1rem var(--clr-purple02);
+  color: var(--clr-white);
+}
+
+.re-generate-btn {
+  background-color: var(--clr-purple02);
+  box-shadow: 1rem 1rem var(--clr-purple01);
+  _color: var(--clr-purple01);
+}
+
+.back-to-categories {
+  font-size: 2.5rem;
+}
+
+.card-default-styling {
+  filter: none;
+  opacity: 100%;
+}
+
+.challenge-card-item {
+  margin-left: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--clr-white);
   font-size: 4rem;
-  cursor: pointer;
+  line-height: 3.5rem;
+  z-index: 1;
 }
 </style>
