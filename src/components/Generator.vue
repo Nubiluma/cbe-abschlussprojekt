@@ -34,7 +34,7 @@
         :id="category.id"
         :selected="category.selected"
         :challengeView="Object.keys(generatedChallenge).length > 0"
-        ><p class="challenge-card-item">Lorem Ipsum</p></Card
+        ><p class="challenge-card-item">Lorem ipsum dolor sit.</p></Card
       >
     </div>
     <div class="challenge-part">
@@ -90,7 +90,7 @@ import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 
 const categories = [
-  { text: "Stil", image: "/style-icon.png", id: "style", selected: false },
+  { text: "Stil", image: "/style-icon.png", id: "style", selected: true },
   { text: "Thema", image: "/theme-icon.jpg", id: "theme", selected: false },
   { text: "Genre", image: "/genre-icon.jpg", id: "genre", selected: false },
   {
@@ -131,8 +131,8 @@ const selectionTools = [
   { text: "Schwamm", id: "sponge" },
 ];
 
-//object test content:
-const generatedChallenge = { foo: "bar" };
+//object test content: foo: "bar"
+const generatedChallenge = {};
 
 const selectedCategories = categories.filter((c) => c.selected);
 </script>
@@ -259,10 +259,10 @@ details {
 
 .challenge-card-item {
   margin-left: 1.5rem;
-  margin-top: 5rem;
+  margin-bottom: 2rem;
   color: var(--clr-white);
   font-size: 4rem;
-  _line-height: 3.5rem;
+  line-height: 3.5rem;
   z-index: 1;
 }
 </style>

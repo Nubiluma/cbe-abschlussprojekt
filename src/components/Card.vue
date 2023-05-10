@@ -7,6 +7,7 @@
       'challenge-view': challengeView,
     }"
   >
+    <img class="dice-symbol" src="/dices.png" v-if="challengeView" />
     <slot>{{ item }}</slot>
     <div v-if="challengeView" class="cover"></div>
     <p
@@ -45,7 +46,8 @@ defineProps({
 }
 
 .category-not-selected {
-  filter: saturate(10%);
+  filter: saturate(20%);
+  opacity: 60%;
 }
 
 .card {
@@ -96,5 +98,17 @@ defineProps({
   position: absolute;
   z-index: -1;
   filter: blur(0.4rem) saturate(30%);
+}
+
+.dice-symbol {
+  margin-inline: auto 1.5rem;
+  margin-top: 1rem;
+  width: 4.5rem;
+  z-index: 1;
+}
+
+.dice-symbol:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 </style>
