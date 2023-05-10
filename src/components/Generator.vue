@@ -8,9 +8,26 @@
     ></MaterialSelection>
   </section>
   <section class="generator-wrapper">
-    <div class="categories-container">
+    <div
+      v-if="Object.keys(generatedChallenge).length === 0"
+      class="categories-container"
+    >
       <Card
         v-for="category in categories"
+        :key="category"
+        :title="category.text"
+        :image="category.image"
+        :id="category.id"
+        :selected="category.selected"
+        :class="{ 'card-default-styling': selectedCategories.length === 0 }"
+      ></Card>
+    </div>
+    <div
+      v-if="Object.keys(generatedChallenge).length > 0"
+      class="categories-container-challenge-view"
+    >
+      <Card
+        v-for="category in selectedCategories"
         :key="category"
         :title="category.text"
         :image="category.image"
@@ -70,18 +87,15 @@
 import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 
-//object test content: foo: "bar"
-const generatedChallenge = {};
-
 const categories = [
   { text: "Stil", image: "/style-icon.png", id: "style", selected: true },
   { text: "Thema", image: "/theme-icon.jpg", id: "theme", selected: true },
-  { text: "Genre", image: "/genre-icon.jpg", id: "genre", selected: true },
+  { text: "Genre", image: "/genre-icon.jpg", id: "genre", selected: false },
   {
     text: "Technik",
     image: "/technique-icon.jpg",
     id: "technique",
-    selected: true,
+    selected: false,
   },
   {
     text: "Farbgebung",
@@ -93,7 +107,7 @@ const categories = [
     text: "Character-Design",
     image: "/character-design-icon.jpg",
     id: "character-design",
-    selected: true,
+    selected: false,
   },
 ];
 
@@ -114,6 +128,11 @@ const selectionTools = [
   { text: "Spachtel", id: "spatula" },
   { text: "Schwamm", id: "sponge" },
 ];
+
+//object test content:
+const generatedChallenge = { foo: "bar" };
+
+const selectedCategories = categories.filter((c) => c.selected);
 </script>
 
 <style scoped>
@@ -153,11 +172,22 @@ details {
   margin-inline: auto;
 }
 
+.categories-container-challenge-view {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-inline: auto;
+  margin-bottom: auto;
+}
+
 .challenge-part {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  height: 700px;
 }
 
 .challenge-container {
@@ -219,5 +249,9 @@ details {
 
 .back-to-categories {
   font-size: 2.5rem;
+}
+
+.card-default-styling {
+  filter: none;
 }
 </style>
