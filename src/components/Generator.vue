@@ -90,26 +90,26 @@ import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 
 const categories = [
-  { text: "Stil", image: "/style-icon.png", id: "style", selected: true },
+  { text: "Stil", image: "/style-icon.png", id: "style", selected: false },
   { text: "Thema", image: "/theme-icon.jpg", id: "theme", selected: false },
   { text: "Genre", image: "/genre-icon.jpg", id: "genre", selected: false },
   {
     text: "Technik",
     image: "/technique-icon.jpg",
     id: "technique",
-    selected: true,
+    selected: false,
   },
   {
     text: "Farbgebung",
     image: "/coloration-icon.jpg",
     id: "coloration",
-    selected: true,
+    selected: false,
   },
   {
     text: "Character-Design",
     image: "/character-design-icon.jpg",
     id: "character-design",
-    selected: true,
+    selected: false,
   },
 ];
 
@@ -255,6 +255,7 @@ details {
 
 .card-default-styling {
   filter: none;
+  opacity: 100%;
 }
 
 .challenge-card-item {
