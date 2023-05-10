@@ -4,15 +4,38 @@
     :class="{
       'category-selected': selected,
       'category-not-selected': !selected,
+      'challenge-view': challengeView,
     }"
   >
-    <p class="card-title">{{ title }}</p>
-    <img class="card-image" :src="image" />
+    <slot>{{ item }}</slot>
+    <div v-if="challengeView" class="cover"></div>
+    <p
+      :class="{
+        'card-title': !challengeView,
+        'challenge-view-title': challengeView,
+      }"
+    >
+      {{ title }}
+    </p>
+    <img
+      :class="{
+        'card-image': !challengeView,
+        'challenge-view-image': challengeView,
+      }"
+      :src="image"
+    />
   </div>
 </template>
 
 <script setup>
-defineProps({ title: [String], image: String, id: String, selected: Boolean });
+defineProps({
+  title: [String],
+  image: String,
+  id: String,
+  selected: Boolean,
+  challengeView: Boolean,
+  item: String,
+});
 </script>
 
 <style scoped>
@@ -28,26 +51,50 @@ defineProps({ title: [String], image: String, id: String, selected: Boolean });
 .card {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: start;
   border-radius: 3rem;
   width: 28rem;
   height: 20rem;
   position: relative;
   overflow: hidden;
 }
+.cover {
+  background-color: var(--clr-purple01);
+  opacity: 50%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.challenge-view {
+  flex-direction: column;
+}
 
 .card-title {
   margin-left: 1.5rem;
-  margin-bottom: 1.25rem;
+  margin-block: auto 1.25rem;
   color: var(--clr-white);
   font-size: 4rem;
   line-height: 3.5rem;
 }
 
+.challenge-view-title {
+  margin-left: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--clr-white);
+  font-size: 3rem;
+  line-height: 3.5rem;
+}
 .card-image {
   height: 100%;
-  filter: brightness(90%);
   position: absolute;
   z-index: -1;
+  filter: brightness(85%);
+}
+
+.challenge-view-image {
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  filter: blur(0.4rem) saturate(30%);
 }
 </style>
