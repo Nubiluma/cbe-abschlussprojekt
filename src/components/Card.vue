@@ -59,6 +59,7 @@ defineProps({
   height: 20rem;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 .cover {
   background-color: var(--clr-purple01);
