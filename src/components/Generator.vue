@@ -14,6 +14,7 @@
     >
       <Card
         v-for="category in categories"
+        @click="selectCategory(category)"
         :key="category"
         :title="category.text"
         :image="category.image"
@@ -58,6 +59,7 @@
       <div class="buttons-container">
         <button
           v-if="Object.keys(generatedChallenge).length === 0"
+          @click="generateChallenge"
           class="generate-btn generator-buttons"
         >
           Generieren
@@ -88,10 +90,24 @@
 <script setup>
 import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
+import { ref } from "vue";
 
-const categories = [
+const themeCategory = {
+  text: "Thema",
+  image: "/theme-icon.jpg",
+  id: "theme",
+  selected: false,
+};
+const characterCategory = {
+  text: "Character-Design",
+  image: "/character-design-icon.jpg",
+  id: "character-design",
+  selected: false,
+};
+
+const categories = ref([
   { text: "Stil", image: "/style-icon.png", id: "style", selected: false },
-  { text: "Thema", image: "/theme-icon.jpg", id: "theme", selected: false },
+
   { text: "Genre", image: "/genre-icon.jpg", id: "genre", selected: false },
   {
     text: "Technik",
@@ -105,13 +121,13 @@ const categories = [
     id: "coloration",
     selected: false,
   },
-  {
-    text: "Character-Design",
-    image: "/character-design-icon.jpg",
-    id: "character-design",
-    selected: false,
-  },
-];
+  themeCategory,
+  characterCategory,
+]);
+
+const selectedCategories = ref([]);
+
+let generatedChallenge = {};
 
 const selectionMedium = [
   { text: "Leinwand", id: "canvas" },
@@ -131,10 +147,22 @@ const selectionTools = [
   { text: "Schwamm", id: "sponge" },
 ];
 
-//object test content: foo: "bar"
-const generatedChallenge = {};
+function selectCategory(category) {
+  if (
+    (category.id === themeCategory.id && characterCategory.selected) ||
+    (category.id === characterCategory.id && themeCategory.selected)
+  ) {
+    console.warn("theme and character-design exclude one another");
+  } else {
+    category.selected = !category.selected;
+  }
+  selectedCategories.value = categories.value.filter((c) => c.selected);
+}
 
-const selectedCategories = categories.filter((c) => c.selected);
+//NYI
+function generateChallenge() {
+  generatedChallenge = { foo: "bar" };
+}
 </script>
 
 <style scoped>

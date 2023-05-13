@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-defineProps({ media: [String], tools: [String], title: String });
+defineProps({ media: { String }, tools: { String }, title: String });
 </script>
 
 <style scoped>
