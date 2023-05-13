@@ -92,6 +92,8 @@ import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 import { ref } from "vue";
 
+/******* variables ********/
+
 const themeCategory = {
   text: "Thema",
   image: "/theme-icon.jpg",
@@ -125,9 +127,11 @@ const categories = ref([
   characterCategory,
 ]);
 
+//contains categories with selected value true
 const selectedCategories = ref([]);
 
-let generatedChallenge = {};
+//contains 1 object if user generates challenge, otherwise it will be empty
+const generatedChallenge = ref({});
 
 const selectionMedium = [
   { text: "Leinwand", id: "canvas" },
@@ -147,6 +151,13 @@ const selectionTools = [
   { text: "Schwamm", id: "sponge" },
 ];
 
+/******* functions ********/
+
+/**
+ * toggle selected value of category and update selectedCategories
+ * themeCategory and characterCategory cannot be selected at the same time
+ * @param {Object} category
+ */
 function selectCategory(category) {
   if (
     (category.id === themeCategory.id && characterCategory.selected) ||
@@ -159,9 +170,9 @@ function selectCategory(category) {
   selectedCategories.value = categories.value.filter((c) => c.selected);
 }
 
-//NYI
+//NYI (currently for testing other functionality)
 function generateChallenge() {
-  generatedChallenge = { foo: "bar" };
+  generatedChallenge.value = { foo: "bar" };
 }
 </script>
 
