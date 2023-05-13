@@ -3,7 +3,7 @@
     <h1 class="app-name">What should I draw?</h1>
   </header>
   <main>
-    <section>
+    <!-- <section>
       <div class="slides">
         <div class="current-slide">
           <img src="slide-1.png" class="current-slide-img" />
@@ -32,7 +32,8 @@
         einzeln neu zu generieren!
       </span>
       <img src="idea.png" class="how-to-tip-img" />
-    </div>
+    </div> -->
+    <RouterView></RouterView>
   </main>
   <footer>By Tanja & Sandra</footer>
 </template>
@@ -40,6 +41,24 @@
 <script setup>
 import HowTo from "./components/HowTo.vue";
 import Generator from "./components/Generator.vue";
+import LoginForm from "./components/LoginForm.vue";
 </script>
 
-<style></style>
+<style scoped>
+.login-btn {
+  padding: 1.5rem 5rem;
+  background-color: var(--clr-purple01);
+  border-radius: 0.8em;
+  color: var(--clr-white);
+  font-size: 2rem;
+}
+
+.register-in-btn {
+  padding: 1.5rem 5rem;
+  background-color: var(--clr-purple02);
+  border-radius: 0.8em;
+  color: var(--clr-white);
+  font-size: 2rem;
+  margin-bottom: 1.2em;
+}
+</style>
