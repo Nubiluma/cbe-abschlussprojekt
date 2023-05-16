@@ -9,7 +9,13 @@
         :key="medium.id"
         class="medium-checkbox-container"
       >
-        <input class="mediums-checkbox" type="checkbox" :id="medium.id" />
+        <input
+          class="mediums-checkbox"
+          type="checkbox"
+          :id="medium.id"
+          :value="medium.text"
+          v-model="store.selectedMaterials"
+        />
         <label class="mediums-label" :for="medium.id">{{ medium.text }}</label>
       </div>
     </div>
@@ -19,7 +25,13 @@
         :key="tool.id"
         class="medium-checkbox-container"
       >
-        <input class="mediums-checkbox" type="checkbox" :id="tool.id" />
+        <input
+          class="mediums-checkbox"
+          type="checkbox"
+          :id="tool.id"
+          :value="tool.text"
+          v-model="store.selectedMaterials"
+        />
         <label class="mediums-label" :for="tool.id">{{ tool.text }}</label>
       </div>
     </div>
@@ -27,7 +39,10 @@
 </template>
 
 <script setup>
-defineProps({ media: [String], tools: [String], title: String });
+import { useAppStore } from "../store";
+defineProps({ media: { String }, tools: { String }, title: String });
+
+const store = useAppStore();
 </script>
 
 <style scoped>
