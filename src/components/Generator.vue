@@ -91,8 +91,12 @@
 import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 import { ref } from "vue";
+import { useAppStore } from "../store";
+import { items } from "./../items";
 
 /******* variables ********/
+
+const store = useAppStore();
 
 const themeCategory = {
   text: "Thema",
@@ -170,9 +174,77 @@ function selectCategory(category) {
   selectedCategories.value = categories.value.filter((c) => c.selected);
 }
 
-//NYI (currently for testing other functionality)
 function generateChallenge() {
-  generatedChallenge.value = { foo: "bar" };
+  if (selectedCategories.value.length > 0) {
+    const categoryKeys = [];
+    selectedCategories.value.forEach((e) => {
+      const values = Object.values(e);
+      categoryKeys.push(values[2]);
+    });
+    getRandomValues(categoryKeys);
+  } else {
+    console.error("at least 1 category must be selected");
+  }
+}
+
+function getRandomValues(array) {
+  const valuesToReturn = [];
+
+  if (array.includes("style")) {
+    const randomValueIndex = Math.floor(Math.random() * items.style.length);
+    valuesToReturn.push(items.style[randomValueIndex]);
+  }
+  if (array.includes("genre")) {
+    const randomValueIndex = Math.floor(Math.random() * items.genre.length);
+    valuesToReturn.push(items.genre[randomValueIndex]);
+  }
+  if (array.includes("coloration")) {
+    const randomValueIndex = Math.floor(
+      Math.random() * items.coloration.length
+    );
+    valuesToReturn.push(items.coloration[randomValueIndex]);
+  }
+  if (array.includes("theme")) {
+    const themeValues = Object.values(items.theme);
+    const randomArrayIndex = Math.floor(Math.random() * themeValues.length);
+    const randomValueIndex = Math.floor(
+      Math.random() * themeValues[randomArrayIndex].length
+    );
+    valuesToReturn.push(themeValues[randomArrayIndex][randomValueIndex]);
+  }
+
+  //todo: factor in selected materials
+  if (array.includes("technique")) {
+    let techniqueKeys = Object.keys(items.technique);
+
+    const techniqueValues = Object.values(items.technique);
+    const randomArrayIndex = Math.floor(Math.random() * techniqueValues.length);
+    const randomValueIndex = Math.floor(
+      Math.random() * techniqueValues[randomArrayIndex].length
+    );
+    valuesToReturn.push(
+      techniqueKeys[randomArrayIndex] +
+        ": " +
+        techniqueValues[randomArrayIndex][randomValueIndex]
+    );
+  }
+
+  if (array.includes("character-design")) {
+    const designToReturn = [];
+
+    const characterKeys = Object.keys(items.characterDesign);
+    const characterValues = Object.values(items.characterDesign);
+
+    for (let i = 0; i < characterKeys.length; i++) {
+      designToReturn.push(
+        characterKeys[i] +
+          ": " +
+          characterValues[i][Math.floor(Math.random() * characterValues.length)]
+      );
+    }
+    console.log(designToReturn);
+  }
+  console.log(valuesToReturn);
 }
 </script>
 
