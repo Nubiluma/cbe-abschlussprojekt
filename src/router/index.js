@@ -1,38 +1,18 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
+import CardView from "../components/Card.vue";
+import HowTo from "../components/HowTo.vue";
+import LoginForm from "../views/LoginForm.vue";
+import MaterialSeclection from "../components/MaterialSelection.vue";
 
-// const routes = [
-//   // {
-//   //   path: "/",
-//   //   name: "home",
-//   //   component: HomeView,
-//   // },
-//   // {
-//   //   path: "/",
-//   //   name: "about",
-//   //   component: AboutView,
-//   // },
-// ];
-
-// const router = createRouter({
-//   history: createWebHistory(process.env.BASE_URL),
-//   routes,
-// });
-
-// export default router;
-
-// 1. Define route components.
-// These can be imported from other files
-// const Home = { template: "<div>Home</div>" };
-// const About = { template: "<div>About</div>" };
-
-// 2. Define some routes
-// Each route should map to a component.
-// We'll talk about nested routes later.
 const routes = [
   { path: "/", component: HomeView },
-  { path: "/about", component: AboutView },
+  { path: "/AboutView", component: AboutView },
+  { path: "/CardView", component: CardView },
+  { path: "/HowTo", component: HowTo },
+  { path: "/LoginForm", component: LoginForm },
+  { path: "/MaterialSeclection", component: MaterialSeclection },
 ];
 
 // 3. Create the router instance and pass the `routes` option
