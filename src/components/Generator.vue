@@ -138,19 +138,20 @@ const selectedCategories = ref([]);
 const generatedChallenge = ref({});
 
 const selectionMedium = [
-  { text: "Leinwand", id: "canvas" },
-  { text: "Papier", id: "paper" },
-  { text: "Aquarell-Papier", id: "aquarel-paper" },
+  { text: "Papier/Leinwand", id: "canvas" },
   { text: "Digitales Medium", id: "digital" },
 ];
 
 const selectionTools = [
-  { text: "Bleistift", id: "pencil" },
+  { text: "Bleistifte", id: "pencil" },
   { text: "Buntstifte", id: "crayon" },
   { text: "Marker", id: "marker" },
-  { text: "Borstenpinsel", id: "brush" },
-  { text: "Aquarellpinsel", id: "aquarel-brush" },
-  { text: "Kohlestift", id: "coal-pencil" },
+  { text: "Acrylfarben", id: "brush" },
+  { text: "Aquarelle", id: "aquarels" },
+  { text: "Ölfarben", id: "oil" },
+  { text: "Pastellkreide", id: "pastels" },
+  { text: "Wachsmalstifte", id: "wax" },
+  { text: "Kohlestifte", id: "coal-pencil" },
   { text: "Spachtel", id: "spatula" },
   { text: "Schwamm", id: "sponge" },
 ];
@@ -215,18 +216,56 @@ function getRandomValues(array) {
 
   //todo: factor in selected materials
   if (array.includes("technique")) {
-    let techniqueKeys = Object.keys(items.technique);
+    const techniqueItems = items.technique;
+    let filteredItems = {};
 
-    const techniqueValues = Object.values(items.technique);
-    const randomArrayIndex = Math.floor(Math.random() * techniqueValues.length);
-    const randomValueIndex = Math.floor(
-      Math.random() * techniqueValues[randomArrayIndex].length
-    );
-    valuesToReturn.push(
-      techniqueKeys[randomArrayIndex] +
-        ": " +
-        techniqueValues[randomArrayIndex][randomValueIndex]
-    );
+    const selectionToolsTexts = [];
+    selectionTools.forEach((tool) => {
+      selectionToolsTexts.push(tool.text);
+    });
+
+    //remove materials that are not selected (in store)
+    //delete keys bound to a material (e.g. Acryl/Digital)
+    for (let key in techniqueItems) {
+      if (!store.selectedMaterials.includes(key)) {
+        delete techniqueItems[key];
+      }
+    }
+    filteredItems = Object.assign(filteredItems, techniqueItems); //!
+    for (let key in techniqueItems) {
+      for (let i = 0; i < store.selectedMaterials.length; i++) {
+        const isTool = selectionToolsTexts.includes(techniqueItems[key][i]);
+        const isInStore = store.selectedMaterials.includes(
+          techniqueItems[key][i]
+        );
+        console.log(techniqueItems[key][i], "is in store? ", isInStore);
+        console.log(techniqueItems[key][i], "is tool? ", isTool);
+
+        if (!isInStore && isTool) {
+          console.warn(techniqueItems[key][i], "will be removed");
+          filteredItems[key] = techniqueItems[key].filter(
+            (item) => item != techniqueItems[key][i]
+          );
+        }
+      }
+    }
+
+    console.log(filteredItems);
+    const techniqueKeys = Object.keys(filteredItems);
+    const techniqueValues = Object.values(filteredItems);
+    // console.log(techniqueKeys);
+    // console.log(techniqueValues);
+
+    // const randomArrayIndex = Math.floor(Math.random() * techniqueValues.length);
+    // const randomValueIndex = Math.floor(
+    //   Math.random() * techniqueValues[randomArrayIndex].length
+    // );
+
+    // valuesToReturn.push(
+    //   techniqueKeys[randomArrayIndex] +
+    //     ": " +
+    //     techniqueValues[randomArrayIndex][randomValueIndex]
+    // );
   }
 
   if (array.includes("character-design")) {
@@ -244,7 +283,7 @@ function getRandomValues(array) {
     }
     console.log(designToReturn);
   }
-  console.log(valuesToReturn);
+  //console.log(valuesToReturn);
 }
 </script>
 

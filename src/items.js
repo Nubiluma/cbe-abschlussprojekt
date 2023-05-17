@@ -84,7 +84,7 @@ export const items = {
     "Sci-Fi",
   ],
   technique: {
-    Digital: [
+    "Digitales Medium": [
       "Eine Linie",
       "Nur ein Pinsel",
       "Nicht radieren",
@@ -101,17 +101,17 @@ export const items = {
       "Beliebige Technik",
     ],
     "Pen&Paper": [
-      "Bleistift",
-      "Buntstift",
-      "Kohlestift",
+      "Bleistifte",
+      "Buntstifte",
+      "Kohlestifte",
+      "Marker",
       "Pastellkreide",
-      "Harte Stife",
-      "Weiche Stifte",
+      "Wachsmalstifte",
       "Ein Linie",
       "Kalligraphie",
       "Beliebige Technik",
     ],
-    Aquarellfarben: [
+    Aquarelle: [
       "Farbverlauf",
       "Sehr wässrig",
       "Feuchtes Papier",
