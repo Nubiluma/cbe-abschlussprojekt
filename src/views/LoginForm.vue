@@ -1,14 +1,26 @@
 <template>
-  <div>
-    <h2>Login</h2>
-    <form @submit.prevent="login">
+  <div class="container">
+    <h1>Hello there 👋🏼</h1>
+    <form @submit.prevent="handleSignin">
       <div>
-        <label for="username">Benutzername:</label>
-        <input type="text" id="username" v-model="username" required />
+        <label for="email">eMail Adresse:</label>
+        <input
+          class="input-email"
+          type="text"
+          id="email"
+          v-model="email"
+          required
+        />
       </div>
       <div>
         <label for="password">Passwort:</label>
-        <input type="password" id="password" v-model="password" required />
+        <input
+          class="input-pw"
+          type="password"
+          id="password"
+          v-model="password"
+          required
+        />
       </div>
       <button type="submit">Anmelden</button>
     </form>
@@ -20,37 +32,55 @@
 
 <script>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { createClient } from "@supabase/supabase-js";
 
 export default {
   setup() {
-    const username = ref("");
+    const email = ref("");
     const password = ref("");
-    const router = useRouter();
 
-    const login = () => {
-      // Füge hier die Logik zur Authentifizierung hinzu
-      // Hier ein Beispiel, um die Eingaben in der Konsole auszugeben:
-      console.log("Benutzername:", username.value);
-      console.log("Passwort:", password.value);
-
-      // Navigiere zur gewünschten Seite (z. B. Dashboard) nach dem erfolgreichen Login
-      router.push("/dashboard");
+    const handleSignin = async () => {
+      try {
+        const { error } = await supabase.auth.signIn({
+          email: email.value,
+          password: password.value,
+        });
+        if (error) throw error;
+      } catch (error) {
+        alert(error.error_description || error.message);
+      }
     };
 
     return {
-      username,
+      email,
       password,
-      login,
+      handleSignin,
     };
   },
 };
 </script>
 
 <style>
+.container {
+  display: flex;
+  padding: 1.5em;
+}
+
+h1 {
+  margin-bottom: 1em;
+  font-size: 3em;
+}
+
 label {
   font-size: 2rem;
 }
+
+input {
+  padding: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+}
+
 .container {
   display: flex;
   flex-direction: column;
