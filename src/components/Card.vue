@@ -34,7 +34,7 @@ defineProps({
   image: String,
   id: String,
   selected: Boolean,
-  challengeView: Boolean,
+  nchallengeView: Boolean,
   item: String,
 });
 </script>

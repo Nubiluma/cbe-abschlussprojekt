@@ -12,16 +12,9 @@
 import Card from "./components/Card.vue";
 import MaterialSelection from "./components/MaterialSelection.vue";
 import HomeView from "./views/HomeView.vue";
-
-// import Generator from "./components/Generator.vue";
-// import LoginForm from "./views/LoginForm.vue";
-// import CardView from "./components/Card.vue";
-// import HowTo from "./components/HowTo.vue";
-// import AboutView from "./views/AboutView.vue";
-// import HomeView from "./views/HomeView.vue";
 </script>
 
-<style scoped>
+<style>
 .login-btn {
   padding: 1.5rem 5rem;
   background-color: var(--clr-purple01);

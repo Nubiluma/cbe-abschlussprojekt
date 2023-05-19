@@ -7,7 +7,6 @@
         officiis voluptatem ut eaque omnis quaerat?
       </p>
     </div>
-
     <div class="slides-indicator-bar">- - -</div>
   </div>
   <form class="login-form">
@@ -46,8 +45,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.btn {
-  padding: 0.8em 1em;
-}
-</style>
+<style scoped></style>

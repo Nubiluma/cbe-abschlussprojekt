@@ -22,7 +22,7 @@
           required
         />
       </div>
-      <button type="submit">Anmelden</button>
+      <button class="login-btn btn" type="submit">Anmelden</button>
     </form>
     <p>
       Noch kein Konto? <router-link to="/register">Registrieren</router-link>
@@ -60,7 +60,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.btn {
+  padding: 1em 2em;
+  background: var(--clr-purple01);
+  color: var(--clr-white);
+  border-radius: 40px;
+}
+
 .container {
   display: flex;
   padding: 1.5em;
