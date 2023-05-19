@@ -35,7 +35,9 @@
         :id="category.id"
         :selected="category.selected"
         :challengeView="Object.keys(generatedChallenge).length > 0"
-        ><p class="challenge-card-item">Lorem ipsum dolor sit.</p></Card
+        ><p class="challenge-card-item">
+          {{ cardChallengeText(category) }}
+        </p></Card
       >
     </div>
     <div class="challenge-part">
@@ -159,6 +161,18 @@ const selectionTools = [
 /******* functions ********/
 
 /**
+ * return corresponding item-texts on card challenge view
+ * @param {*} category
+ */
+function cardChallengeText(category) {
+  for (let key in generatedChallenge.value) {
+    if (category.text == key) {
+      return generatedChallenge.value[key];
+    }
+  }
+}
+
+/**
  * toggle selected value of category and update selectedCategories
  * themeCategory and characterCategory cannot be selected at the same time
  * @param {Object} category
@@ -176,7 +190,6 @@ function selectCategory(category) {
 }
 
 function generateChallenge() {
-  //generatedChallenge.value = { foo: "bar" };
   if (selectedCategories.value.length > 0) {
     const categoryKeys = [];
     selectedCategories.value.forEach((e) => {
@@ -190,21 +203,19 @@ function generateChallenge() {
 }
 
 function getRandomValues(array) {
-  const valuesToReturn = [];
-
   if (array.includes("style")) {
     const randomValueIndex = Math.floor(Math.random() * items.style.length);
-    valuesToReturn.push(items.style[randomValueIndex]);
+    generatedChallenge.value.Stil = items.style[randomValueIndex];
   }
   if (array.includes("genre")) {
     const randomValueIndex = Math.floor(Math.random() * items.genre.length);
-    valuesToReturn.push(items.genre[randomValueIndex]);
+    generatedChallenge.value.Genre = items.genre[randomValueIndex];
   }
   if (array.includes("coloration")) {
     const randomValueIndex = Math.floor(
       Math.random() * items.coloration.length
     );
-    valuesToReturn.push(items.coloration[randomValueIndex]);
+    generatedChallenge.value.Farbgebung = items.coloration[randomValueIndex];
   }
   if (array.includes("theme")) {
     const themeValues = Object.values(items.theme);
@@ -212,7 +223,8 @@ function getRandomValues(array) {
     const randomValueIndex = Math.floor(
       Math.random() * themeValues[randomArrayIndex].length
     );
-    valuesToReturn.push(themeValues[randomArrayIndex][randomValueIndex]);
+    generatedChallenge.value.Thema =
+      themeValues[randomArrayIndex][randomValueIndex];
   }
 
   if (array.includes("technique")) {
@@ -250,22 +262,20 @@ function getRandomValues(array) {
       }
     }
 
-    //console.log("filtered:", filteredItems);
     const techniqueKeys = Object.keys(filteredItems);
 
     const randomKey =
       techniqueKeys[Math.floor(Math.random() * techniqueKeys.length)];
-    //console.log(randomKey);
 
     const randomValueIndex = Math.floor(
       Math.random() * filteredItems[randomKey].length
     );
 
-    valuesToReturn.push(
-      randomKey + ": " + filteredItems[randomKey][randomValueIndex]
-    );
+    generatedChallenge.value.Technik =
+      randomKey + ": " + filteredItems[randomKey][randomValueIndex];
   }
 
+  //todo: different display
   if (array.includes("character-design")) {
     const designToReturn = [];
 
@@ -281,7 +291,7 @@ function getRandomValues(array) {
     }
     console.log(designToReturn);
   }
-  console.log(valuesToReturn);
+  //console.log(generatedChallenge.value);
 }
 </script>
 
