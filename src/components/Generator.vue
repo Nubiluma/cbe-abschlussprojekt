@@ -135,7 +135,7 @@ const categories = ref([
 const selectedCategories = ref([]);
 
 //contains 1 object if user generates challenge, otherwise it will be empty
-const generatedChallenge = ref({});
+let generatedChallenge = ref({});
 
 const selectionMedium = [
   { text: "Papier/Leinwand", id: "canvas" },
@@ -176,6 +176,7 @@ function selectCategory(category) {
 }
 
 function generateChallenge() {
+  //generatedChallenge.value = { foo: "bar" };
   if (selectedCategories.value.length > 0) {
     const categoryKeys = [];
     selectedCategories.value.forEach((e) => {
@@ -214,7 +215,6 @@ function getRandomValues(array) {
     valuesToReturn.push(themeValues[randomArrayIndex][randomValueIndex]);
   }
 
-  //todo: factor in selected materials
   if (array.includes("technique")) {
     const techniqueItems = items.technique;
     let filteredItems = {};
@@ -225,47 +225,45 @@ function getRandomValues(array) {
     });
 
     //remove materials that are not selected (in store)
-    //delete keys bound to a material (e.g. Acryl/Digital)
+    //delete keys bound to a material (e.g. Acryl/Digital) that is not in store
     for (let key in techniqueItems) {
       if (!store.selectedMaterials.includes(key)) {
         delete techniqueItems[key];
       }
     }
-    filteredItems = Object.assign(filteredItems, techniqueItems); //!
+    filteredItems = Object.assign(filteredItems, techniqueItems);
     for (let key in techniqueItems) {
-      for (let i = 0; i < store.selectedMaterials.length; i++) {
+      for (let i = 0; i < techniqueItems[key].length; i++) {
         const isTool = selectionToolsTexts.includes(techniqueItems[key][i]);
         const isInStore = store.selectedMaterials.includes(
           techniqueItems[key][i]
         );
-        console.log(techniqueItems[key][i], "is in store? ", isInStore);
-        console.log(techniqueItems[key][i], "is tool? ", isTool);
+        // console.log(techniqueItems[key][i], "is in store? ", isInStore);
+        // console.log(techniqueItems[key][i], "is tool? ", isTool);
 
         if (!isInStore && isTool) {
-          console.warn(techniqueItems[key][i], "will be removed");
-          filteredItems[key] = techniqueItems[key].filter(
+          //console.warn(techniqueItems[key][i], "will be removed");
+          filteredItems[key] = filteredItems[key].filter(
             (item) => item != techniqueItems[key][i]
           );
         }
       }
     }
 
-    console.log(filteredItems);
+    //console.log("filtered:", filteredItems);
     const techniqueKeys = Object.keys(filteredItems);
-    const techniqueValues = Object.values(filteredItems);
-    // console.log(techniqueKeys);
-    // console.log(techniqueValues);
 
-    // const randomArrayIndex = Math.floor(Math.random() * techniqueValues.length);
-    // const randomValueIndex = Math.floor(
-    //   Math.random() * techniqueValues[randomArrayIndex].length
-    // );
+    const randomKey =
+      techniqueKeys[Math.floor(Math.random() * techniqueKeys.length)];
+    //console.log(randomKey);
 
-    // valuesToReturn.push(
-    //   techniqueKeys[randomArrayIndex] +
-    //     ": " +
-    //     techniqueValues[randomArrayIndex][randomValueIndex]
-    // );
+    const randomValueIndex = Math.floor(
+      Math.random() * filteredItems[randomKey].length
+    );
+
+    valuesToReturn.push(
+      randomKey + ": " + filteredItems[randomKey][randomValueIndex]
+    );
   }
 
   if (array.includes("character-design")) {
@@ -283,7 +281,7 @@ function getRandomValues(array) {
     }
     console.log(designToReturn);
   }
-  //console.log(valuesToReturn);
+  console.log(valuesToReturn);
 }
 </script>
 
