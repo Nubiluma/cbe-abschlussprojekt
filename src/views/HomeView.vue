@@ -1,13 +1,13 @@
 <template>
   <div class="slides">
-    <!-- <div class="current-slide">
+    <div class="current-slide">
       <img src="slide-1.png" class="current-slide-img" />
       <p class="current-slide-text">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas
         officiis voluptatem ut eaque omnis quaerat?
       </p>
-    </div> -->
-    <Slider></Slider>
+    </div>
+
     <div class="slides-indicator-bar">- - -</div>
   </div>
   <form class="login-form">
@@ -32,7 +32,6 @@
 
 <script>
 import { useRouter } from "vue-router";
-import Slider from "../components/Slider.vue";
 
 export default {
   setup() {
@@ -44,7 +43,6 @@ export default {
       navigateToLogin,
     };
   },
-  components: { Slider },
 };
 </script>
 
