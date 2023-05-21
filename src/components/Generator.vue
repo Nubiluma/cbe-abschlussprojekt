@@ -35,7 +35,9 @@
         :id="category.id"
         :selected="category.selected"
         :challengeView="Object.keys(generatedChallenge).length > 0"
-        ><p class="challenge-card-item">
+        @rerollValue="handleRerollValue"
+      >
+        <p class="challenge-card-item">
           {{ cardChallengeText(category) }}
         </p></Card
       >
@@ -74,12 +76,14 @@
         </button>
         <button
           v-if="Object.keys(generatedChallenge).length > 0"
+          @click="generateChallenge"
           class="re-generate-btn generator-buttons"
         >
           Alles neu würfeln
         </button>
         <p
           v-if="Object.keys(generatedChallenge).length > 0"
+          @click="reset"
           class="back-to-categories"
         >
           Kategorien neu festlegen ←
@@ -189,6 +193,9 @@ function selectCategory(category) {
   selectedCategories.value = categories.value.filter((c) => c.selected);
 }
 
+/**
+ * generate challenge object depending on selected categories and materials
+ */
 function generateChallenge() {
   if (selectedCategories.value.length > 0) {
     const categoryKeys = [];
@@ -292,6 +299,19 @@ function getRandomValues(array) {
     console.log(designToReturn);
   }
   //console.log(generatedChallenge.value);
+}
+
+/**
+ * reset/empty selected categories and generated challenge
+ */
+function reset() {
+  selectedCategories.value = [];
+  generatedChallenge.value = {};
+}
+
+//NYI
+function handleRerollValue() {
+  console.log("test");
 }
 </script>
 
@@ -409,6 +429,7 @@ details {
 
 .back-to-categories {
   font-size: 2.5rem;
+  cursor: pointer;
 }
 
 .card-default-styling {
