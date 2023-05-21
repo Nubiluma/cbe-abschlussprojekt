@@ -8,7 +8,7 @@
     }"
   >
     <img
-      @click="rerollValue"
+      @click="emitFunction"
       class="dice-symbol"
       src="/dices.png"
       v-if="challengeView"
@@ -40,7 +40,7 @@ defineProps({
   image: String,
   id: String,
   selected: Boolean,
-  nchallengeView: Boolean,
+  challengeView: Boolean,
   item: String,
 });
 
