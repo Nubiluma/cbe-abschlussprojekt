@@ -33,6 +33,7 @@
 <script setup>
 import { ref } from "vue";
 import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../supabase";
 
 const email = ref("");
 const password = ref("");
