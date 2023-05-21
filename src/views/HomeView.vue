@@ -32,8 +32,6 @@ const router = useRouter();
 const navigateToLogin = () => {
   router.push("/LoginForm");
 };
-
-import { ref, computed } from "vue";
 </script>
 
 <style></style>
