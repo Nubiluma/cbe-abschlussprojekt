@@ -30,33 +30,28 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
 import { createClient } from "@supabase/supabase-js";
 
-export default {
-  setup() {
-    const email = ref("");
-    const password = ref("");
+const email = ref("");
+const password = ref("");
 
-    const handleSignin = async () => {
-      try {
-        const { error } = await supabase.auth.signIn({
-          email: email.value,
-          password: password.value,
-        });
-        if (error) throw error;
-      } catch (error) {
-        alert(error.error_description || error.message);
-      }
-    };
-
+const handleSignin = async () => {
+  try {
+    const { error } = await supabase.auth.signIn({
+      email: email.value,
+      password: password.value,
+    });
+    if (error) throw error;
+  } catch (error) {
+    alert(error.error_description || error.message);
     return {
       email,
       password,
       handleSignin,
     };
-  },
+  }
 };
 </script>
 

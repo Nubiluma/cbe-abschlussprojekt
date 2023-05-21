@@ -7,7 +7,13 @@
       'challenge-view': challengeView,
     }"
   >
-    <img class="dice-symbol" src="/dices.png" v-if="challengeView" />
+    <img
+      @click="rerollValue"
+      class="dice-symbol"
+      src="/dices.png"
+      v-if="challengeView"
+    />
+
     <slot>{{ item }}</slot>
     <div v-if="challengeView" class="cover"></div>
     <p
@@ -37,6 +43,11 @@ defineProps({
   nchallengeView: Boolean,
   item: String,
 });
+
+const emit = defineEmits(["rerollValue"]);
+const emitFunction = function () {
+  emit("rerollValue");
+};
 </script>
 
 <style scoped>

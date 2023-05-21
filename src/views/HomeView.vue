@@ -1,13 +1,6 @@
 <template>
-  <div class="slides">
-    <div class="current-slide">
-      <img src="slide-1.png" class="current-slide-img" />
-      <p class="current-slide-text">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-        officiis voluptatem ut eaque omnis quaerat?
-      </p>
-    </div>
-    <div class="slides-indicator-bar">- - -</div>
+  <div>
+    <SliderVue></SliderVue>
   </div>
   <form class="login-form">
     <button @click="navigateToLogin" class="login-btn btn">Anmelden</button>
@@ -17,7 +10,7 @@
     <HowTo></HowTo>
   </section>
   <section class="generator-section">
-    <Generator></Generator>
+    <Generator />
   </section>
   <div class="how-to-tip">
     <span class="how-to-tip-text">
@@ -29,20 +22,16 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useRouter } from "vue-router";
+import SliderVue from "../components/Slides.vue";
+import Generator from "../components/Generator.vue";
 
-export default {
-  setup() {
-    const router = useRouter();
-    const navigateToLogin = () => {
-      router.push("/LoginForm");
-    };
-    return {
-      navigateToLogin,
-    };
-  },
+const router = useRouter();
+
+const navigateToLogin = () => {
+  router.push("/LoginForm");
 };
 </script>
 
-<style scoped></style>
+<style></style>
