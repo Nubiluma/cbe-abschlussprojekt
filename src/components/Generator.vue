@@ -35,7 +35,7 @@
         :id="category.id"
         :selected="category.selected"
         :challengeView="Object.keys(generatedChallenge).length > 0"
-        @rerollValue="handleRerollValue"
+        @rerollValue="handleRerollValue(category.id)"
       >
         <p class="challenge-card-item">
           {{ cardChallengeText(category) }}
@@ -104,37 +104,35 @@ import { items } from "./../items";
 
 const store = useAppStore();
 
-const themeCategory = {
-  text: "Thema",
-  image: "/theme-icon.jpg",
-  id: "theme",
-  selected: false,
-};
-const characterCategory = {
-  text: "Character-Design",
-  image: "/character-design-icon.jpg",
-  id: "character-design",
-  selected: false,
-};
-
 const categories = ref([
   { text: "Stil", image: "/style-icon.png", id: "style", selected: false },
-
-  { text: "Genre", image: "/genre-icon.jpg", id: "genre", selected: false },
   {
-    text: "Technik",
-    image: "/technique-icon.jpg",
-    id: "technique",
+    text: "Motiv",
+    image: "/theme-icon.jpg",
+    id: "theme",
     selected: false,
   },
+  {
+    text: "Hintergrund",
+    image: "/background-icon.jpg",
+    id: "background",
+    selected: false,
+  },
+
+  { text: "Genre", image: "/genre-icon.jpg", id: "genre", selected: false },
+
   {
     text: "Farbgebung",
     image: "/coloration-icon.jpg",
     id: "coloration",
     selected: false,
   },
-  themeCategory,
-  characterCategory,
+  {
+    text: "Technik",
+    image: "/technique-icon.jpg",
+    id: "technique",
+    selected: false,
+  },
 ]);
 
 //contains categories with selected value true
@@ -182,14 +180,7 @@ function cardChallengeText(category) {
  * @param {Object} category
  */
 function selectCategory(category) {
-  if (
-    (category.id === themeCategory.id && characterCategory.selected) ||
-    (category.id === characterCategory.id && themeCategory.selected)
-  ) {
-    console.warn("theme and character-design exclude one another");
-  } else {
-    category.selected = !category.selected;
-  }
+  category.selected = !category.selected;
   selectedCategories.value = categories.value.filter((c) => c.selected);
 }
 
@@ -209,32 +200,32 @@ function generateChallenge() {
   }
 }
 
-function getRandomValues(array) {
-  if (array.includes("style")) {
+function getRandomValues(categoryKeys) {
+  if (categoryKeys.includes("style")) {
     const randomValueIndex = Math.floor(Math.random() * items.style.length);
     generatedChallenge.value.Stil = items.style[randomValueIndex];
   }
-  if (array.includes("genre")) {
+  if (categoryKeys.includes("genre")) {
     const randomValueIndex = Math.floor(Math.random() * items.genre.length);
     generatedChallenge.value.Genre = items.genre[randomValueIndex];
   }
-  if (array.includes("coloration")) {
+  if (categoryKeys.includes("coloration")) {
     const randomValueIndex = Math.floor(
       Math.random() * items.coloration.length
     );
     generatedChallenge.value.Farbgebung = items.coloration[randomValueIndex];
   }
-  if (array.includes("theme")) {
+  if (categoryKeys.includes("theme")) {
     const themeValues = Object.values(items.theme);
     const randomArrayIndex = Math.floor(Math.random() * themeValues.length);
     const randomValueIndex = Math.floor(
       Math.random() * themeValues[randomArrayIndex].length
     );
-    generatedChallenge.value.Thema =
+    generatedChallenge.value.Motiv =
       themeValues[randomArrayIndex][randomValueIndex];
   }
 
-  if (array.includes("technique")) {
+  if (categoryKeys.includes("technique")) {
     const techniqueItems = items.technique;
     let filteredItems = {};
 
@@ -282,21 +273,11 @@ function getRandomValues(array) {
       randomKey + ": " + filteredItems[randomKey][randomValueIndex];
   }
 
-  //todo: different display
-  if (array.includes("character-design")) {
-    const designToReturn = [];
-
-    const characterKeys = Object.keys(items.characterDesign);
-    const characterValues = Object.values(items.characterDesign);
-
-    for (let i = 0; i < characterKeys.length; i++) {
-      designToReturn.push(
-        characterKeys[i] +
-          ": " +
-          characterValues[i][Math.floor(Math.random() * characterValues.length)]
-      );
-    }
-    console.log(designToReturn);
+  if (categoryKeys.includes("background")) {
+    const randomValueIndex = Math.floor(
+      Math.random() * items.background.length
+    );
+    generatedChallenge.value.Hintergrund = items.background[randomValueIndex];
   }
   //console.log(generatedChallenge.value);
 }
@@ -309,9 +290,13 @@ function reset() {
   generatedChallenge.value = {};
 }
 
-//NYI
-function handleRerollValue() {
-  console.log("test");
+/**
+ * re-generate value for single category in challenge
+ * @param {String} id
+ */
+function handleRerollValue(id) {
+  const category = [id];
+  getRandomValues(category);
 }
 </script>
 
