@@ -1,5 +1,6 @@
 <template>
   <div class="carousel">
+    <img :src="selectedImage" alt="Selected Image" />
     <div class="indicator-bar">
       <span
         v-for="(image, index) in images"
@@ -8,7 +9,6 @@
         @click="selectImage(index)"
       ></span>
     </div>
-    <img :src="selectedImage" alt="Selected Image" />
   </div>
 </template>
 

@@ -10,7 +10,7 @@
     <HowTo></HowTo>
   </section>
   <section class="generator-section">
-    <Generator></Generator>
+    <Generator />
   </section>
   <div class="how-to-tip">
     <span class="how-to-tip-text">
@@ -25,6 +25,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import SliderVue from "../components/Slides.vue";
+import Generator from "../components/Generator.vue";
 
 const router = useRouter();
 

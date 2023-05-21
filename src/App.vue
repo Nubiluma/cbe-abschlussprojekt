@@ -12,6 +12,7 @@
 import Card from "./components/Card.vue";
 import MaterialSelection from "./components/MaterialSelection.vue";
 import HomeView from "./views/HomeView.vue";
+import Generator from "./components/Generator.vue";
 </script>
 
 <style>
