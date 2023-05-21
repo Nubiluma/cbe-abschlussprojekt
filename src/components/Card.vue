@@ -8,7 +8,7 @@
     }"
   >
     <img
-      @click="rerollValue"
+      @click="emitFunction(id)"
       class="dice-symbol"
       src="/dices.png"
       v-if="challengeView"

@@ -26,6 +26,7 @@
 import { useRouter } from "vue-router";
 import SliderVue from "../components/Slides.vue";
 import Generator from "../components/Generator.vue";
+import HowTo from "./../components/HowTo.vue";
 
 const router = useRouter();
 
