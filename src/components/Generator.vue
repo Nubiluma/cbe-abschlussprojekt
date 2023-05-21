@@ -35,7 +35,11 @@
         :id="category.id"
         :selected="category.selected"
         :challengeView="Object.keys(generatedChallenge).length > 0"
-        ><p class="challenge-card-item">Lorem ipsum dolor sit.</p></Card
+        @rerollValue="handleRerollValue"
+      >
+        <p class="challenge-card-item">
+          {{ cardChallengeText(category) }}
+        </p></Card
       >
     </div>
     <div class="challenge-part">
@@ -72,12 +76,14 @@
         </button>
         <button
           v-if="Object.keys(generatedChallenge).length > 0"
+          @click="generateChallenge"
           class="re-generate-btn generator-buttons"
         >
           Alles neu würfeln
         </button>
         <p
           v-if="Object.keys(generatedChallenge).length > 0"
+          @click="reset"
           class="back-to-categories"
         >
           Kategorien neu festlegen ←
@@ -91,8 +97,12 @@
 import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 import { ref } from "vue";
+import { useAppStore } from "../store";
+import { items } from "./../items";
 
 /******* variables ********/
+
+const store = useAppStore();
 
 const themeCategory = {
   text: "Thema",
@@ -131,27 +141,40 @@ const categories = ref([
 const selectedCategories = ref([]);
 
 //contains 1 object if user generates challenge, otherwise it will be empty
-const generatedChallenge = ref({});
+let generatedChallenge = ref({});
 
 const selectionMedium = [
-  { text: "Leinwand", id: "canvas" },
-  { text: "Papier", id: "paper" },
-  { text: "Aquarell-Papier", id: "aquarel-paper" },
+  { text: "Papier/Leinwand", id: "canvas" },
   { text: "Digitales Medium", id: "digital" },
 ];
 
 const selectionTools = [
-  { text: "Bleistift", id: "pencil" },
+  { text: "Bleistifte", id: "pencil" },
   { text: "Buntstifte", id: "crayon" },
   { text: "Marker", id: "marker" },
-  { text: "Borstenpinsel", id: "brush" },
-  { text: "Aquarellpinsel", id: "aquarel-brush" },
-  { text: "Kohlestift", id: "coal-pencil" },
+  { text: "Acrylfarben", id: "brush" },
+  { text: "Aquarelle", id: "aquarels" },
+  { text: "Ölfarben", id: "oil" },
+  { text: "Pastellkreide", id: "pastels" },
+  { text: "Wachsmalstifte", id: "wax" },
+  { text: "Kohlestifte", id: "coal-pencil" },
   { text: "Spachtel", id: "spatula" },
   { text: "Schwamm", id: "sponge" },
 ];
 
 /******* functions ********/
+
+/**
+ * return corresponding item-texts on card challenge view
+ * @param {*} category
+ */
+function cardChallengeText(category) {
+  for (let key in generatedChallenge.value) {
+    if (category.text == key) {
+      return generatedChallenge.value[key];
+    }
+  }
+}
 
 /**
  * toggle selected value of category and update selectedCategories
@@ -170,9 +193,125 @@ function selectCategory(category) {
   selectedCategories.value = categories.value.filter((c) => c.selected);
 }
 
-//NYI (currently for testing other functionality)
+/**
+ * generate challenge object depending on selected categories and materials
+ */
 function generateChallenge() {
-  generatedChallenge.value = { foo: "bar" };
+  if (selectedCategories.value.length > 0) {
+    const categoryKeys = [];
+    selectedCategories.value.forEach((e) => {
+      const values = Object.values(e);
+      categoryKeys.push(values[2]);
+    });
+    getRandomValues(categoryKeys);
+  } else {
+    console.error("at least 1 category must be selected");
+  }
+}
+
+function getRandomValues(array) {
+  if (array.includes("style")) {
+    const randomValueIndex = Math.floor(Math.random() * items.style.length);
+    generatedChallenge.value.Stil = items.style[randomValueIndex];
+  }
+  if (array.includes("genre")) {
+    const randomValueIndex = Math.floor(Math.random() * items.genre.length);
+    generatedChallenge.value.Genre = items.genre[randomValueIndex];
+  }
+  if (array.includes("coloration")) {
+    const randomValueIndex = Math.floor(
+      Math.random() * items.coloration.length
+    );
+    generatedChallenge.value.Farbgebung = items.coloration[randomValueIndex];
+  }
+  if (array.includes("theme")) {
+    const themeValues = Object.values(items.theme);
+    const randomArrayIndex = Math.floor(Math.random() * themeValues.length);
+    const randomValueIndex = Math.floor(
+      Math.random() * themeValues[randomArrayIndex].length
+    );
+    generatedChallenge.value.Thema =
+      themeValues[randomArrayIndex][randomValueIndex];
+  }
+
+  if (array.includes("technique")) {
+    const techniqueItems = items.technique;
+    let filteredItems = {};
+
+    const selectionToolsTexts = [];
+    selectionTools.forEach((tool) => {
+      selectionToolsTexts.push(tool.text);
+    });
+
+    //remove materials that are not selected (in store)
+    //delete keys bound to a material (e.g. Acryl/Digital) that is not in store
+    for (let key in techniqueItems) {
+      if (!store.selectedMaterials.includes(key)) {
+        delete techniqueItems[key];
+      }
+    }
+    filteredItems = Object.assign(filteredItems, techniqueItems);
+    for (let key in techniqueItems) {
+      for (let i = 0; i < techniqueItems[key].length; i++) {
+        const isTool = selectionToolsTexts.includes(techniqueItems[key][i]);
+        const isInStore = store.selectedMaterials.includes(
+          techniqueItems[key][i]
+        );
+        // console.log(techniqueItems[key][i], "is in store? ", isInStore);
+        // console.log(techniqueItems[key][i], "is tool? ", isTool);
+
+        if (!isInStore && isTool) {
+          //console.warn(techniqueItems[key][i], "will be removed");
+          filteredItems[key] = filteredItems[key].filter(
+            (item) => item != techniqueItems[key][i]
+          );
+        }
+      }
+    }
+
+    const techniqueKeys = Object.keys(filteredItems);
+
+    const randomKey =
+      techniqueKeys[Math.floor(Math.random() * techniqueKeys.length)];
+
+    const randomValueIndex = Math.floor(
+      Math.random() * filteredItems[randomKey].length
+    );
+
+    generatedChallenge.value.Technik =
+      randomKey + ": " + filteredItems[randomKey][randomValueIndex];
+  }
+
+  //todo: different display
+  if (array.includes("character-design")) {
+    const designToReturn = [];
+
+    const characterKeys = Object.keys(items.characterDesign);
+    const characterValues = Object.values(items.characterDesign);
+
+    for (let i = 0; i < characterKeys.length; i++) {
+      designToReturn.push(
+        characterKeys[i] +
+          ": " +
+          characterValues[i][Math.floor(Math.random() * characterValues.length)]
+      );
+    }
+    console.log(designToReturn);
+  }
+  //console.log(generatedChallenge.value);
+}
+
+/**
+ * reset/empty selected categories and generated challenge
+ */
+function reset() {
+  selectedCategories.value = [];
+  generatedChallenge.value = {};
+}
+
+//NYI
+function handleRerollValue() {
+  console.log("test");
 }
 </script>
 
@@ -290,6 +429,7 @@ details {
 
 .back-to-categories {
   font-size: 2.5rem;
+  cursor: pointer;
 }
 
 .card-default-styling {

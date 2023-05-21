@@ -5,6 +5,12 @@ import { ref } from "vue";
 export const pinia = createPinia();
 
 export const useAppStore = defineStore("app", () => {
-  const selectedMaterials = ref([]);
+  const selectedMaterials = ref([
+    "Digitales Medium",
+    "Marker",
+    "Schwamm",
+    "Acrylfarben",
+    "Pen&Paper",
+  ]);
   return { selectedMaterials };
 });
