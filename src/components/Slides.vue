@@ -15,7 +15,11 @@
 <script setup>
 import { ref, computed } from "vue";
 
-const images = ref(["/slide-1.png", "/slide-2.jpg", "/slide-3.jpg"]);
+const images = ref([
+  "/slide-1-transparent.png",
+  "/slide-2-transparent.png",
+  "/slide-3-transparent.png",
+]);
 
 const selectedIndex = ref(0);
 
@@ -55,6 +59,6 @@ function selectImage(index) {
 }
 
 img {
-  max-width: 50%;
+  width: var(--slides-img-height);
 }
 </style>

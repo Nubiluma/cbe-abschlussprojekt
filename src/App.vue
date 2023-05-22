@@ -1,19 +1,13 @@
 <template>
-  <header>
+  <header class="app-header">
     <h1 class="app-name">What should I draw?</h1>
+    <img src="paint-stroke.png" class="header-bg" />
   </header>
   <main>
     <RouterView />
   </main>
   <footer>By Tanja & Sandra</footer>
 </template>
-
-<script setup>
-import Card from "./components/Card.vue";
-import MaterialSelection from "./components/MaterialSelection.vue";
-import HomeView from "./views/HomeView.vue";
-import Generator from "./components/Generator.vue";
-</script>
 
 <style>
 .login-btn {
