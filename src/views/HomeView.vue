@@ -1,16 +1,18 @@
 <template>
   <div>
-    <SliderVue></SliderVue>
+    <Slider></Slider>
   </div>
   <form class="login-form">
     <button @click="navigateToLogin" class="login-btn btn">Anmelden</button>
-    <button class="register-in-btn btn">Registrieren</button>
+    <button class="register-in-btn btn">
+      <router-link to="/Register">Registrieren</router-link>
+    </button>
   </form>
   <section class="how-to-section">
     <HowTo></HowTo>
   </section>
   <section class="generator-section">
-    <Generator />
+    <Generator></Generator>
   </section>
   <div class="how-to-tip">
     <span class="how-to-tip-text">
@@ -24,9 +26,9 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import SliderVue from "../components/Slides.vue";
+import Slider from "../components/Slides.vue";
 import Generator from "../components/Generator.vue";
-import HowTo from "./../components/HowTo.vue";
+import HowTo from "../components/HowTo.vue";
 
 const router = useRouter();
 

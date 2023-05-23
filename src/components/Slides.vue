@@ -1,31 +1,23 @@
 <template>
-  <div class="carousel">
-    <img :src="selectedImage" alt="Selected Image" />
-    <div class="indicator-bar">
-      <span
-        v-for="(image, index) in images"
-        :key="index"
-        :class="{ active: index === selectedIndex }"
-        @click="selectImage(index)"
-      ></span>
-    </div>
-  </div>
+  <Carousel :autoplay="2000" :wrap-around="true">
+    <Slide v-for="(slide, index) in slides" :key="index">
+      <img :src="slide" alt="Slide Image" class="carousel__image" />
+    </Slide>
+
+    <template #addons>
+      <Pagination />
+    </template>
+  </Carousel>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { Carousel, Pagination, Slide } from "vue3-carousel";
+import "vue3-carousel/dist/carousel.css";
 
-const images = ref(["/slide-1.png", "/slide-2.jpg", "/slide-3.jpg"]);
+const slides = ["slide-1.png", "slide-2.jpg", "slide-3.jpg"];
 
-const selectedIndex = ref(0);
-
-const selectedImage = computed(() => images.value[selectedIndex.value]);
-
-function selectImage(index) {
-  selectedIndex.value = index;
-}
+const name = "Autoplay";
 </script>
-
 <style scoped>
 .carousel {
   display: flex;

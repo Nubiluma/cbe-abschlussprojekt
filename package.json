@@ -12,7 +12,8 @@
     "pinia": "^2.0.35",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
-    "vue-supabase": "^2.3.0"
+    "vue-supabase": "^2.3.0",
+    "vue3-carousel": "^0.3.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",

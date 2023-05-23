@@ -3,7 +3,7 @@
     <h1 class="app-name">What should I draw?</h1>
   </header>
   <main>
-    <RouterView />
+    <RouterView></RouterView>
   </main>
   <footer>By Tanja & Sandra</footer>
 </template>
@@ -13,6 +13,7 @@ import Card from "./components/Card.vue";
 import MaterialSelection from "./components/MaterialSelection.vue";
 import HomeView from "./views/HomeView.vue";
 import Generator from "./components/Generator.vue";
+import Slides from "./components/Slides.vue";
 </script>
 
 <style>
