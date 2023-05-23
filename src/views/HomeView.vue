@@ -35,4 +35,24 @@ const navigateToLogin = () => {
 };
 </script>
 
-<style></style>
+<style scoped>
+button {
+  margin-bottom: 1em;
+}
+.login-btn {
+  padding: 1.5rem 5rem;
+  background-color: var(--clr-purple01);
+  border-radius: 0.8em;
+  color: var(--clr-white);
+  font-size: 2rem;
+}
+
+.register-in-btn {
+  padding: 1.5rem 5rem;
+  background-color: var(--clr-purple02);
+  border-radius: 0.8em;
+  color: var(--clr-white);
+  font-size: 2rem;
+  margin-bottom: 1.2em;
+}
+</style>
