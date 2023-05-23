@@ -11,10 +11,15 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { Carousel, Pagination, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 
-const slides = ["slide-1.png", "slide-2.jpg", "slide-3.jpg"];
+const slides = ref([
+  "/slide-1-transparent.png",
+  "/slide-2-transparent.png",
+  "/slide-3-transparent.png",
+]);
 
 const name = "Autoplay";
 </script>
@@ -47,6 +52,6 @@ const name = "Autoplay";
 }
 
 img {
-  max-width: 50%;
+  width: var(--slides-img-height);
 }
 </style>
