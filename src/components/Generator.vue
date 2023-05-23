@@ -319,11 +319,11 @@ details {
 }
 
 .selection-section {
-  margin-block: 4rem;
-  padding: 1rem 8rem;
+  margin-block: 10rem 7rem;
 }
 
 .generator-wrapper {
+  margin-top: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8rem;

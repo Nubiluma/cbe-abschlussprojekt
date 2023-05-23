@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <SliderVue></SliderVue>
-  </div>
+  <section class="slides-section">
+    <Slides></Slides>
+  </section>
   <form class="login-form">
     <button @click="navigateToLogin" class="login-btn btn">Anmelden</button>
     <button class="register-in-btn btn">Registrieren</button>
@@ -24,7 +24,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import SliderVue from "../components/Slides.vue";
+import Slides from "../components/Slides.vue";
 import Generator from "../components/Generator.vue";
 import HowTo from "./../components/HowTo.vue";
 
@@ -35,4 +35,24 @@ const navigateToLogin = () => {
 };
 </script>
 
-<style></style>
+<style scoped>
+button {
+  margin-bottom: 1em;
+}
+.login-btn {
+  padding: 1.5rem 5rem;
+  background-color: var(--clr-purple01);
+  border-radius: 0.8em;
+  color: var(--clr-white);
+  font-size: 2rem;
+}
+
+.register-in-btn {
+  padding: 1.5rem 5rem;
+  background-color: var(--clr-purple02);
+  border-radius: 0.8em;
+  color: var(--clr-white);
+  font-size: 2rem;
+  margin-bottom: 1.2em;
+}
+</style>
