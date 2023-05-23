@@ -21,6 +21,7 @@ html {
   --shadow-clr: #535353;
   --clr-light-grey: #d9d9d999;
   --slides-img-height: 35rem;
+  --how-to-img-height: 40rem;
 }
 
 body {
@@ -97,8 +98,7 @@ button {
 
 .how-to-section {
   padding-bottom: 20rem;
-  background: url("paint-stroke-background.png") no-repeat center bottom;
-  background-size: contain;
+  margin-inline: 0;
 }
 
 /** not yet implemented */
