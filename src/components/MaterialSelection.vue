@@ -46,9 +46,15 @@ const store = useAppStore();
 </script>
 
 <style scoped>
-.medium-selection {
-  margin-block: 4rem 2rem;
+summary {
+  margin-left: 2rem;
+}
 
+input {
+  accent-color: var(--clr-purple01);
+}
+.medium-selection {
+  margin: 4rem;
   display: flex;
   justify-content: start;
   align-items: center;
