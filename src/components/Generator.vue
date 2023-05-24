@@ -201,6 +201,10 @@ function generateChallenge() {
   }
 }
 
+/**
+ *
+ * @param {Array} categoryKeys
+ */
 function getRandomValues(categoryKeys) {
   if (categoryKeys.includes("style")) {
     const randomValueIndex = Math.floor(Math.random() * items.style.length);
@@ -286,17 +290,20 @@ function getRandomValues(categoryKeys) {
 function acceptChallenge() {
   if (Object.keys(generatedChallenge.value).length > 0) {
     store.challenges.push(generatedChallenge.value);
-    console.log(store.challenges);
     reset();
   }
 }
 
 /**
- * reset/empty selected categories and generated challenge
+ * reset selected categories and delete generated challenge value
  */
 function reset() {
   selectedCategories.value = [];
   generatedChallenge.value = {};
+
+  categories.value.forEach((c) => {
+    c.selected = false;
+  });
 }
 
 /**
