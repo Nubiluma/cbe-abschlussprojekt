@@ -1,12 +1,12 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import vuetify from './plugins/vuetify'
-import { loadFonts } from './plugins/webfontloader'
+import { createApp } from "vue";
+import App from "./App.vue";
 
-loadFonts()
+import router from "./router";
+import { pinia } from "./store";
 
-createApp(App)
-  .use(router)
-  .use(vuetify)
-  .mount('#app')
+import "./style.css";
+
+const app = createApp(App);
+app.use(router);
+app.use(pinia);
+app.mount("#app");
