@@ -12,5 +12,7 @@ export const useAppStore = defineStore("app", () => {
     "Acrylfarben",
     "Pen&Paper",
   ]);
-  return { selectedMaterials };
+
+  const challenges = ref([]);
+  return { selectedMaterials, challenges };
 });

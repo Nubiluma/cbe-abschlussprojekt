@@ -70,6 +70,7 @@
         </button>
         <button
           v-if="Object.keys(generatedChallenge).length > 0"
+          @click="acceptChallenge"
           class="accept-challenge-btn generator-buttons"
         >
           Challenge annehmen
@@ -194,13 +195,18 @@ function generateChallenge() {
       const values = Object.values(e);
       categoryKeys.push(values[2]);
     });
-    getRandomValues(categoryKeys);
+    generateRandomValues(categoryKeys);
   } else {
     console.error("at least 1 category must be selected");
   }
 }
 
-function getRandomValues(categoryKeys) {
+/**
+ * generate random values for all selected categories
+ * factor in selected materials
+ * @param {Array} categoryKeys
+ */
+function generateRandomValues(categoryKeys) {
   if (categoryKeys.includes("style")) {
     const randomValueIndex = Math.floor(Math.random() * items.style.length);
     generatedChallenge.value.Stil = items.style[randomValueIndex];
@@ -283,11 +289,25 @@ function getRandomValues(categoryKeys) {
 }
 
 /**
- * reset/empty selected categories and generated challenge
+ * save not empty generated challenge to store
+ */
+function acceptChallenge() {
+  if (Object.keys(generatedChallenge.value).length > 0) {
+    store.challenges.push(generatedChallenge.value);
+    reset();
+  }
+}
+
+/**
+ * reset selected categories and delete generated challenge value
  */
 function reset() {
   selectedCategories.value = [];
   generatedChallenge.value = {};
+
+  categories.value.forEach((c) => {
+    c.selected = false;
+  });
 }
 
 /**
@@ -296,7 +316,7 @@ function reset() {
  */
 function handleRerollValue(id) {
   const category = [id];
-  getRandomValues(category);
+  generateRandomValues(category);
 }
 </script>
 
