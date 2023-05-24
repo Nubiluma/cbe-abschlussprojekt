@@ -70,6 +70,7 @@
         </button>
         <button
           v-if="Object.keys(generatedChallenge).length > 0"
+          @click="acceptChallenge"
           class="accept-challenge-btn generator-buttons"
         >
           Challenge annehmen
@@ -280,6 +281,14 @@ function getRandomValues(categoryKeys) {
     generatedChallenge.value.Hintergrund = items.background[randomValueIndex];
   }
   //console.log(generatedChallenge.value);
+}
+
+function acceptChallenge() {
+  if (Object.keys(generatedChallenge.value).length > 0) {
+    store.challenges.push(generatedChallenge.value);
+    console.log(store.challenges);
+    reset();
+  }
 }
 
 /**
