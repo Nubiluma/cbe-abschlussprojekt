@@ -195,17 +195,18 @@ function generateChallenge() {
       const values = Object.values(e);
       categoryKeys.push(values[2]);
     });
-    getRandomValues(categoryKeys);
+    generateRandomValues(categoryKeys);
   } else {
     console.error("at least 1 category must be selected");
   }
 }
 
 /**
- *
+ * generate random values for all selected categories
+ * factor in selected materials
  * @param {Array} categoryKeys
  */
-function getRandomValues(categoryKeys) {
+function generateRandomValues(categoryKeys) {
   if (categoryKeys.includes("style")) {
     const randomValueIndex = Math.floor(Math.random() * items.style.length);
     generatedChallenge.value.Stil = items.style[randomValueIndex];
@@ -287,6 +288,9 @@ function getRandomValues(categoryKeys) {
   //console.log(generatedChallenge.value);
 }
 
+/**
+ * save not empty generated challenge to store
+ */
 function acceptChallenge() {
   if (Object.keys(generatedChallenge.value).length > 0) {
     store.challenges.push(generatedChallenge.value);
@@ -312,7 +316,7 @@ function reset() {
  */
 function handleRerollValue(id) {
   const category = [id];
-  getRandomValues(category);
+  generateRandomValues(category);
 }
 </script>
 
