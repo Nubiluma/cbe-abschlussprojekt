@@ -1,6 +1,8 @@
 <template>
   <div class="carousel">
-    <img :src="selectedImage" alt="Selected Image" />
+    <transition name="fade">
+      <img :src="selectedImage" alt="Selected Image" />
+    </transition>
     <div class="indicator-bar">
       <span
         v-for="(image, index) in images"
@@ -60,5 +62,15 @@ function selectImage(index) {
 
 img {
   width: var(--slides-img-height);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

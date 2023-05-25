@@ -25,14 +25,14 @@
       <button class="login-btn btn" type="submit">Anmelden</button>
     </form>
     <p>
-      Noch kein Konto? <router-link to="/register">Registrieren</router-link>
+      Noch kein Konto? <router-link to="/Register">Registrieren</router-link>
     </p>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../supabase";
 
 const email = ref("");
 const password = ref("");

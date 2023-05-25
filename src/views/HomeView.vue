@@ -1,10 +1,12 @@
 <template>
-  <section class="slides-section">
-    <Slides></Slides>
-  </section>
+  <!-- <section class="slides-section"> -->
+  <Slides></Slides>
+  <!-- </section> -->
   <form class="login-form">
     <button @click="navigateToLogin" class="login-btn btn">Anmelden</button>
-    <button class="register-in-btn btn">Registrieren</button>
+    <button @click="navigateToRegister" class="register-in-btn btn">
+      Registrieren
+    </button>
   </form>
   <section class="how-to-section">
     <HowTo></HowTo>
@@ -32,6 +34,10 @@ const router = useRouter();
 
 const navigateToLogin = () => {
   router.push("/LoginForm");
+};
+
+const navigateToRegister = () => {
+  router.push("/Register");
 };
 </script>
 
