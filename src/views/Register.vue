@@ -12,33 +12,25 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
-
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../supabase";
 
 const email = ref("");
 const password = ref("");
 const error = ref("");
 
-// const store = useStore();
+// const store = use store();
 
 async function register() {
-  try {
-    const { user, error } = await supabase.auth.signUp({
-      email: email.value,
-      password: password.value,
-    });
-
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    store.user = user;
-    // Hier kannst du weitere Aktionen nach erfolgreicher Registrierung ausführen, z.B. Weiterleitung zur Hauptseite.
-  } catch (error) {
-    console.error(error);
-    error.value = error.message;
+  const { data, error } = await supabase.auth.signUp({
+    email: email.value,
+    password: password.value,
+  });
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(data);
   }
 }
 </script>
