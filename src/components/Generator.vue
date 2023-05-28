@@ -333,7 +333,6 @@ function generateRandomValues(categoryKeys) {
     );
     generatedChallenge.value.Hintergrund = items.background[randomValueIndex];
   }
-  //console.log(generatedChallenge.value);
 }
 
 /**
@@ -418,13 +417,13 @@ details {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 730px;
-  transform: translateY(-1.5rem);
+  _height: 760px;
 }
 
 .challenge-container {
   width: 100%;
   _height: 60%;
+  transform: translateY(-5%);
 }
 
 .challenge-display {

@@ -6,6 +6,7 @@ export const items = {
     "Realistisch",
     "Simpel",
     "Abstrakt",
+    "Pixel Art",
   ],
   theme: {
     stillLife: [
@@ -59,6 +60,7 @@ export const items = {
       "Mann",
       "Trans-Mann/-Frau",
       "Senior(in)",
+      "Nico",
     ],
   },
   genre: [
@@ -81,7 +83,7 @@ export const items = {
     Ölfarben: ["Beliebige Technik"],
     Acrylfarben: [
       "Wässrig",
-      "Ohne Wasser",
+      "Kein Wasser",
       "Schnelle Bewegungen",
       "Schwamm",
       "Spachtel",
