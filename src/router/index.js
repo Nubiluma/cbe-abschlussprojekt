@@ -4,6 +4,7 @@ import AboutView from "../views/AboutView.vue";
 import CardView from "../components/Card.vue";
 import HowTo from "../components/HowTo.vue";
 import LoginForm from "../views/LoginForm.vue";
+import Register from "../views/Register.vue";
 import MaterialSeclection from "../components/MaterialSelection.vue";
 
 const routes = [
@@ -13,6 +14,7 @@ const routes = [
   { path: "/HowTo", component: HowTo },
   { path: "/LoginForm", component: LoginForm },
   { path: "/MaterialSeclection", component: MaterialSeclection },
+  { path: "/Register", component: Register },
 ];
 
 // 3. Create the router instance and pass the `routes` option
