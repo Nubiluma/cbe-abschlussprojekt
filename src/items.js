@@ -77,7 +77,6 @@ export const items = {
       "Eine Linie",
       "Nur ein Pinsel",
       "Nicht radieren",
-      "Kalligraphie",
       "Beliebige Technik",
     ],
     Ölfarben: ["Beliebige Technik"],
@@ -97,7 +96,6 @@ export const items = {
       "Pastellkreide",
       "Wachsmalstifte",
       "Ein Linie",
-      "Kalligraphie",
       "Beliebige Technik",
     ],
     Aquarelle: [
@@ -106,7 +104,6 @@ export const items = {
       "Feuchtes Papier",
       "Trockenes Papier",
       "Tropfen",
-      "Kalligraphie",
       "Beliebige Technik",
     ],
   },

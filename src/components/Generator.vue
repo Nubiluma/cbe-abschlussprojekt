@@ -37,7 +37,12 @@
         :challengeView="Object.keys(generatedChallenge).length > 0"
         @rerollValue="handleRerollValue(category.id)"
       >
-        <p class="challenge-card-item">
+        <p
+          :class="{
+            'challenge-view-technik-item': category.id == 'technique',
+            'challenge-card-item': category.id != 'technique',
+          }"
+        >
           {{ cardChallengeText(category) }}
         </p></Card
       >
@@ -392,11 +397,13 @@ details {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15rem;
+  height: 80rem;
 }
 
 .categories-container {
   display: grid;
   justify-items: center;
+  align-content: end;
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
   margin-inline: auto;
@@ -417,7 +424,6 @@ details {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  _height: 760px;
 }
 
 .challenge-container {
@@ -509,6 +515,15 @@ details {
   color: var(--clr-white);
   font-size: 3.5rem;
   line-height: 3.5rem;
+  z-index: 1;
+}
+
+.challenge-view-technik-item {
+  margin-left: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--clr-white);
+  font-size: 3rem;
+  line-height: 3rem;
   z-index: 1;
 }
 </style>
