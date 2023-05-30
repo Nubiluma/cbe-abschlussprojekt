@@ -37,7 +37,12 @@
         :challengeView="Object.keys(generatedChallenge).length > 0"
         @rerollValue="handleRerollValue(category.id)"
       >
-        <p class="challenge-card-item">
+        <p
+          :class="{
+            'challenge-view-technik-item': category.id == 'technique',
+            'challenge-card-item': category.id != 'technique',
+          }"
+        >
           {{ cardChallengeText(category) }}
         </p></Card
       >
@@ -48,15 +53,62 @@
           v-if="Object.keys(generatedChallenge).length > 0"
           class="challenge-display"
         >
-          <h3>Challenge:</h3>
+          <h3 class="challenge-heading">Challenge:</h3>
           <div class="challenge-text-container">
-            <p class="challenge-text">Kreiere ein Bild im ... Stil</p>
-            <p class="challenge-text">Male ein/e ...</p>
-            <p class="challenge-text">
-              Male das Bild so, als wäre es aus dem ... Genre
+            <p
+              v-if="Object.keys(generatedChallenge).includes('Stil')"
+              class="challenge-text"
+            >
+              Kreiere ein Bild im
+              <span class="challenge-text-item"
+                >''{{ generatedChallenge.Stil }}''</span
+              >-Stil
             </p>
-            <p class="challenge-text">Male mit ...</p>
-            <p class="challenge-text">Verwende die Farbgebung ...</p>
+            <p
+              v-if="Object.keys(generatedChallenge).includes('Motiv')"
+              class="challenge-text"
+            >
+              Male folgendes:
+              <span class="challenge-text-item">{{
+                generatedChallenge.Motiv
+              }}</span>
+            </p>
+            <p
+              v-if="Object.keys(generatedChallenge).includes('Hintergrund')"
+              class="challenge-text"
+            >
+              Verwende folgenden Hintergrund:
+              <span class="challenge-text-item">{{
+                generatedChallenge.Hintergrund
+              }}</span>
+            </p>
+            <p
+              v-if="Object.keys(generatedChallenge).includes('Genre')"
+              class="challenge-text"
+            >
+              Male das Bild so, als wäre es aus dem
+              <span class="challenge-text-item"
+                >''{{ generatedChallenge.Genre }}''</span
+              >-Genre
+            </p>
+            <p
+              v-if="Object.keys(generatedChallenge).includes('Farbgebung')"
+              class="challenge-text"
+            >
+              Verwende die Farbgebung
+              <span class="challenge-text-item"
+                >''{{ generatedChallenge.Farbgebung }}''</span
+              >
+            </p>
+            <p
+              v-if="Object.keys(generatedChallenge).includes('Technik')"
+              class="challenge-text"
+            >
+              Technik:
+              <span class="challenge-text-item">{{
+                generatedChallenge.Technik
+              }}</span>
+            </p>
           </div>
         </div>
       </div>
@@ -80,7 +132,7 @@
           @click="generateChallenge"
           class="re-generate-btn generator-buttons"
         >
-          Alles neu würfeln
+          Alle neu würfeln
         </button>
         <p
           v-if="Object.keys(generatedChallenge).length > 0"
@@ -164,9 +216,10 @@ const selectionTools = [
 /******* functions ********/
 
 /**
- * return corresponding item-texts on card challenge view
+ * @returns corresponding item-texts on card challenge view
  * @param {*} category
  */
+
 function cardChallengeText(category) {
   for (let key in generatedChallenge.value) {
     if (category.text == key) {
@@ -276,7 +329,7 @@ function generateRandomValues(categoryKeys) {
     );
 
     generatedChallenge.value.Technik =
-      randomKey + ": " + filteredItems[randomKey][randomValueIndex];
+      filteredItems[randomKey][randomValueIndex] + " (" + randomKey + ")";
   }
 
   if (categoryKeys.includes("background")) {
@@ -285,7 +338,6 @@ function generateRandomValues(categoryKeys) {
     );
     generatedChallenge.value.Hintergrund = items.background[randomValueIndex];
   }
-  //console.log(generatedChallenge.value);
 }
 
 /**
@@ -295,6 +347,7 @@ function acceptChallenge() {
   if (Object.keys(generatedChallenge.value).length > 0) {
     store.challenges.push(generatedChallenge.value);
     reset();
+    console.log(store.challenges);
   }
 }
 
@@ -328,11 +381,6 @@ h2 {
   letter-spacing: 0.5rem;
 }
 
-h3 {
-  font-size: 4rem;
-  padding: 2rem 3rem;
-}
-
 details {
   font-size: 3rem;
   color: var(--clr-purple01);
@@ -340,18 +388,22 @@ details {
 
 .selection-section {
   margin-block: 10rem 7rem;
+  margin-inline: 10rem;
 }
 
 .generator-wrapper {
   margin-top: 0;
+  margin-inline: 10rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8rem;
+  gap: 15rem;
+  height: 80rem;
 }
 
 .categories-container {
   display: grid;
   justify-items: center;
+  align-content: end;
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
   margin-inline: auto;
@@ -372,29 +424,44 @@ details {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 700px;
 }
 
 .challenge-container {
-  width: 80%;
-  height: 60%;
+  width: 100%;
+  _height: 60%;
+  transform: translateY(-5%);
 }
 
 .challenge-display {
+  padding-bottom: 2rem;
   background-color: var(--clr-purple01);
   color: var(--clr-white);
   border-radius: 4rem;
   box-shadow: 1rem 1rem 1rem var(--clr-purple02);
-  min-height: 90%;
+  height: fit-content;
+}
+
+.challenge-heading {
+  font-size: 4rem;
+  padding: 2.5rem 3rem;
+  padding-bottom: 1rem;
 }
 
 .challenge-text-container {
-  margin: 3rem;
-  height: 20rem;
-  font-size: 2rem;
+  margin: 2rem 3rem;
+  _height: 25rem;
+  font-size: 2.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 2rem;
+}
+
+.challenge-text {
+  color: black;
+}
+
+.challenge-text-item {
+  color: white;
 }
 
 .buttons-container {
@@ -446,8 +513,17 @@ details {
   margin-left: 1.5rem;
   margin-bottom: 2rem;
   color: var(--clr-white);
-  font-size: 4rem;
+  font-size: 3.5rem;
   line-height: 3.5rem;
+  z-index: 1;
+}
+
+.challenge-view-technik-item {
+  margin-left: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--clr-white);
+  font-size: 3rem;
+  line-height: 3rem;
   z-index: 1;
 }
 </style>
