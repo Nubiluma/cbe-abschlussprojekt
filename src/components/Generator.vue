@@ -5,12 +5,14 @@
       title="Ausklappen, um deine gewünschten Materialien zu wählen"
       :media="selectionMedium"
       :tools="selectionTools"
+      data-cy="material-selection"
     ></MaterialSelection>
   </section>
   <section class="generator-wrapper">
     <div
       v-if="Object.keys(generatedChallenge).length === 0"
       class="categories-container"
+      data-cy="categories-container"
     >
       <Card
         v-for="category in categories"
@@ -26,6 +28,7 @@
     <div
       v-if="Object.keys(generatedChallenge).length > 0"
       class="categories-container-challenge-view"
+      data-cy="categories-container-challenge-view"
     >
       <Card
         v-for="category in selectedCategories"
@@ -52,6 +55,7 @@
         <div
           v-if="Object.keys(generatedChallenge).length > 0"
           class="challenge-display"
+          data-cy="challenge-display"
         >
           <h3 class="challenge-heading">Challenge:</h3>
           <div class="challenge-text-container">
@@ -117,6 +121,7 @@
           v-if="Object.keys(generatedChallenge).length === 0"
           @click="generateChallenge"
           class="generate-btn generator-buttons"
+          data-cy="generate-button"
         >
           Generieren
         </button>
@@ -124,6 +129,7 @@
           v-if="Object.keys(generatedChallenge).length > 0"
           @click="acceptChallenge"
           class="accept-challenge-btn generator-buttons"
+          data-cy="accept-button"
         >
           Challenge annehmen
         </button>
@@ -131,6 +137,7 @@
           v-if="Object.keys(generatedChallenge).length > 0"
           @click="generateChallenge"
           class="re-generate-btn generator-buttons"
+          data-cy="re-generate-button"
         >
           Alle neu würfeln
         </button>
@@ -138,6 +145,7 @@
           v-if="Object.keys(generatedChallenge).length > 0"
           @click="reset"
           class="back-to-categories"
+          data-cy="back-button"
         >
           Kategorien neu festlegen ←
         </p>
