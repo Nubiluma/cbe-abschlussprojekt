@@ -250,11 +250,12 @@ function selectCategory(category) {
  * generate challenge object depending on selected categories and materials
  */
 function generateChallenge() {
+  const categoryIdIndex = 2;
   if (selectedCategories.value.length > 0) {
     const categoryKeys = [];
     selectedCategories.value.forEach((e) => {
       const values = Object.values(e);
-      categoryKeys.push(values[2]);
+      categoryKeys.push(values[categoryIdIndex]);
     });
     generateRandomValues(categoryKeys);
   } else {
