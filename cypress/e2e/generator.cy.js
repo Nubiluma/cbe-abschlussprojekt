@@ -16,6 +16,17 @@ describe("generator", () => {
     cy.get("[data-cy=material-selection]").should("have.css", "height", "35px"); //collapsed height is 35px
   });
 
+  it.only("should expand or collapse when clicked", () => {
+    cy.get("[data-cy=medium-text]").click();
+    cy.get("[data-cy=material-selection]").should(
+      "have.css",
+      "height",
+      "221px"
+    ); //expanded height is 221px
+    cy.get("[data-cy=medium-text]").click();
+    cy.get("[data-cy=material-selection]").should("have.css", "height", "35px");
+  });
+
   /*** Categories ***/
 
   it("should show all default cards before generating", () => {
