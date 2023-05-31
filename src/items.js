@@ -6,6 +6,7 @@ export const items = {
     "Realistisch",
     "Simpel",
     "Abstrakt",
+    "Pixel Art",
   ],
   theme: {
     stillLife: [
@@ -59,6 +60,7 @@ export const items = {
       "Mann",
       "Trans-Mann/-Frau",
       "Senior(in)",
+      "Nico",
     ],
   },
   genre: [
@@ -75,13 +77,12 @@ export const items = {
       "Eine Linie",
       "Nur ein Pinsel",
       "Nicht radieren",
-      "Kalligraphie",
       "Beliebige Technik",
     ],
     Ölfarben: ["Beliebige Technik"],
     Acrylfarben: [
       "Wässrig",
-      "Ohne Wasser",
+      "Kein Wasser",
       "Schnelle Bewegungen",
       "Schwamm",
       "Spachtel",
@@ -95,7 +96,6 @@ export const items = {
       "Pastellkreide",
       "Wachsmalstifte",
       "Ein Linie",
-      "Kalligraphie",
       "Beliebige Technik",
     ],
     Aquarelle: [
@@ -104,7 +104,6 @@ export const items = {
       "Feuchtes Papier",
       "Trockenes Papier",
       "Tropfen",
-      "Kalligraphie",
       "Beliebige Technik",
     ],
   },

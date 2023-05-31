@@ -66,8 +66,8 @@ const emitFunction = function () {
   justify-content: space-between;
   align-items: start;
   border-radius: 3rem;
-  width: 28rem;
-  height: 20rem;
+  width: 30rem;
+  height: 22rem;
   position: relative;
   overflow: hidden;
   cursor: pointer;
