@@ -9,6 +9,7 @@
           type="text"
           id="email"
           v-model="email"
+          :value="credentials.email"
           required
         />
       </div>
