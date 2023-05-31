@@ -1,7 +1,7 @@
 <template>
   <details>
     <summary>
-      <span class="medium-text"> {{ title }}</span>
+      <span class="medium-text" data-cy="medium-text"> {{ title }}</span>
     </summary>
     <div class="medium-selection">
       <div
