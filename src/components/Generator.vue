@@ -166,7 +166,7 @@ import { items } from "./../items";
 const store = useAppStore();
 
 const categories = ref([
-  { text: "Stil", image: "/style-icon.png", id: "style", selected: false },
+  { text: "Stil", image: "/style-icon.jpg", id: "style", selected: false },
   {
     text: "Motiv",
     image: "/theme-icon.jpg",
