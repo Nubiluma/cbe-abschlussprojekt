@@ -102,7 +102,7 @@ const emitFunction = function () {
   height: 100%;
   position: absolute;
   z-index: -1;
-  filter: brightness(85%);
+  filter: brightness(90%);
 }
 
 .challenge-view-image {
