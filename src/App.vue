@@ -7,9 +7,7 @@
     <RouterView />
   </main>
   <footer>
-    <button @click="navigateToCopyrights" class="copyrights-link">
-      Copyrights
-    </button>
+    <p class="credits">App by Tanja & Sandra</p>
     <div class="link-icons-container">
       <a href="./">
         <img class="icon" src="home.png" alt="home icon" />
@@ -26,7 +24,9 @@
         ><img class="icon" src="github.png" alt="github icon"
       /></a>
     </div>
-    <p class="credits">App by Tanja & Sandra</p>
+    <button @click="navigateToCopyrights" class="copyrights-link">
+      - Copyrights -
+    </button>
   </footer>
 </template>
 
@@ -44,6 +44,7 @@ const navigateToCopyrights = () => {
 .icon {
   height: 4rem;
   cursor: pointer;
+  margin-block: 1.25rem 0.25rem;
 }
 
 a {

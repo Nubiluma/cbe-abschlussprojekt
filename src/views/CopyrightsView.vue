@@ -22,7 +22,7 @@ h1 {
 }
 
 .links-container {
-  margin-inline: auto;
+  margin: 5rem auto;
   width: 50%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
