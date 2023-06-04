@@ -10,7 +10,7 @@
   </section>
   <section class="generator-wrapper">
     <div
-      v-if="Object.keys(generatedChallenge).length === 0"
+      v-if="!isChallengeGenerated()"
       class="categories-container"
       data-cy="categories-container"
     >
@@ -26,7 +26,7 @@
       ></Card>
     </div>
     <div
-      v-if="Object.keys(generatedChallenge).length > 0"
+      v-if="isChallengeGenerated()"
       class="categories-container-challenge-view"
       data-cy="categories-container-challenge-view"
     >
@@ -53,7 +53,7 @@
     <div class="challenge-part">
       <div class="challenge-container">
         <div
-          v-if="Object.keys(generatedChallenge).length > 0"
+          v-if="isChallengeGenerated()"
           class="challenge-display"
           data-cy="challenge-display"
         >
@@ -118,7 +118,7 @@
       </div>
       <div class="buttons-container">
         <button
-          v-if="Object.keys(generatedChallenge).length === 0"
+          v-if="!isChallengeGenerated()"
           @click="generateChallenge"
           class="generate-btn generator-buttons"
           data-cy="generate-button"
@@ -126,15 +126,15 @@
           Generieren
         </button>
         <button
-          v-if="Object.keys(generatedChallenge).length > 0"
+          v-if="isChallengeGenerated()"
           @click="acceptChallenge"
           class="accept-challenge-btn generator-buttons"
           data-cy="accept-button"
         >
-          Challenge annehmen
+          {{ challengeButtonText }}
         </button>
         <button
-          v-if="Object.keys(generatedChallenge).length > 0"
+          v-if="isChallengeGenerated()"
           @click="generateChallenge"
           class="re-generate-btn generator-buttons"
           data-cy="re-generate-button"
@@ -142,7 +142,7 @@
           Alle neu würfeln
         </button>
         <p
-          v-if="Object.keys(generatedChallenge).length > 0"
+          v-if="isChallengeGenerated()"
           @click="reset"
           class="back-to-categories"
           data-cy="back-button"
@@ -221,6 +221,8 @@ const selectionTools = [
   { text: "Schwamm", id: "sponge" },
 ];
 
+let challengeButtonText = ref("Challenge annehmen");
+
 /******* functions ********/
 
 /**
@@ -234,6 +236,10 @@ function cardChallengeText(category) {
       return generatedChallenge.value[key];
     }
   }
+}
+
+function isChallengeGenerated() {
+  return Object.keys(generatedChallenge.value).length > 0;
 }
 
 /**
@@ -355,8 +361,13 @@ function generateRandomValues(categoryKeys) {
 function acceptChallenge() {
   if (Object.keys(generatedChallenge.value).length > 0) {
     store.challenges.push(generatedChallenge.value);
-    reset();
-    console.log(store.challenges);
+    challengeButtonText.value = "Du hast die Challenge angenommen!";
+    setTimeout(() => {
+      reset();
+      challengeButtonText.value = "Challenge annehmen";
+    }, 2000);
+
+    //console.log(store.challenges);
   }
 }
 

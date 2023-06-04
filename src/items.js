@@ -116,7 +116,7 @@ export const items = {
     "Satte Farben",
     "Blasse Farben",
     "Dunkel",
-    "Komplementärfarben",
+    "Komplementär Farben",
     "Sepia",
     "Licht-Effekte",
   ],
