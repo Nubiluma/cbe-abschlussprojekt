@@ -37,7 +37,7 @@
         :image="category.image"
         :id="category.id"
         :selected="category.selected"
-        :challengeView="Object.keys(generatedChallenge).length > 0"
+        :challengeView="isChallengeGenerated()"
         @rerollValue="handleRerollValue(category.id)"
       >
         <p
@@ -121,6 +121,7 @@
           v-if="!isChallengeGenerated()"
           @click="generateChallenge"
           class="generate-btn generator-buttons"
+          :class="{ disabled: selectedCategories.length === 0 }"
           data-cy="generate-button"
         >
           Generieren
@@ -202,10 +203,7 @@ const selectedCategories = ref([]);
 //contains 1 object if user generates challenge, otherwise it will be empty
 let generatedChallenge = ref({});
 
-const selectionMedium = [
-  { text: "Papier/Leinwand", id: "canvas" },
-  { text: "Digitales Medium", id: "digital" },
-];
+const selectionMedium = [{ text: "Digitales Medium", id: "digital" }];
 
 const selectionTools = [
   { text: "Bleistifte", id: "pencil" },
@@ -238,6 +236,9 @@ function cardChallengeText(category) {
   }
 }
 
+/**
+ * @returns true if challenge has been generated (important for rendering)
+ */
 function isChallengeGenerated() {
   return Object.keys(generatedChallenge.value).length > 0;
 }
@@ -311,11 +312,12 @@ function generateRandomValues(categoryKeys) {
     //remove materials that are not selected (in store)
     //delete keys bound to a material (e.g. Acryl/Digital) that is not in store
     for (let key in techniqueItems) {
-      if (!store.selectedMaterials.includes(key)) {
+      if (!store.selectedMaterials.includes(key) && key != "Pen&Paper") {
         delete techniqueItems[key];
       }
     }
     filteredItems = Object.assign(filteredItems, techniqueItems);
+    console.log(filteredItems);
     for (let key in techniqueItems) {
       for (let i = 0; i < techniqueItems[key].length; i++) {
         const isTool = selectionToolsTexts.includes(techniqueItems[key][i]);
@@ -545,5 +547,11 @@ details {
   font-size: 3rem;
   line-height: 3rem;
   z-index: 1;
+}
+
+.disabled {
+  cursor: auto;
+  opacity: 50%;
+  filter: grayscale();
 }
 </style>
