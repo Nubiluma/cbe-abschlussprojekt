@@ -166,7 +166,7 @@ import { items } from "./../items";
 const store = useAppStore();
 
 const categories = ref([
-  { text: "Stil", image: "/style-icon.png", id: "style", selected: false },
+  { text: "Stil", image: "/style-icon.jpg", id: "style", selected: false },
   {
     text: "Motiv",
     image: "/theme-icon.jpg",
@@ -250,11 +250,12 @@ function selectCategory(category) {
  * generate challenge object depending on selected categories and materials
  */
 function generateChallenge() {
+  const categoryIdIndex = 2;
   if (selectedCategories.value.length > 0) {
     const categoryKeys = [];
     selectedCategories.value.forEach((e) => {
       const values = Object.values(e);
-      categoryKeys.push(values[2]);
+      categoryKeys.push(values[categoryIdIndex]);
     });
     generateRandomValues(categoryKeys);
   } else {

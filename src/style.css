@@ -27,16 +27,29 @@ html {
 body {
   margin: 0;
   height: 100%;
+  position: relative;
+}
+
+#app {
+  min-height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 section {
   margin: 10rem 15rem;
 }
 footer {
-  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
   width: 100%;
-  text-align: center;
-  font-size: 2rem;
+  margin-bottom: 0;
+  padding-block: 2rem;
   background-color: var(--clr-purple01);
   color: var(--clr-white);
 }
@@ -67,6 +80,24 @@ button {
   height: 45rem;
   width: 125rem;
   filter: saturate(90%) brightness(110%);
+}
+
+.credits {
+  font-size: 2.5rem;
+  letter-spacing: 0.15rem;
+}
+
+.copyrights-link {
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 2rem;
+  letter-spacing: 0.15rem;
+  cursor: pointer;
+}
+
+.copyrights-link:hover {
+  font-size: 2.25rem;
 }
 
 .slides {
@@ -126,6 +157,5 @@ button {
 }
 
 .generator-section {
-  width: 1700px;
   margin: 0 auto;
 }

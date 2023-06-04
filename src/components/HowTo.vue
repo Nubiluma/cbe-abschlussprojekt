@@ -2,7 +2,7 @@
   <h2 class="how-to-header">So verwendest du die App</h2>
   <div class="steps-container">
     <div class="steps">
-      <img src="checklist-transparent.png" class="how-to-images" />
+      <img src="how-to-1.png" class="how-to-images" />
       <div class="step-text-container">
         <p class="step-title">Kategorien auswählen</p>
         <p class="how-to-text">
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="steps">
-      <img src="step2.png" class="how-to-images" />
+      <img src="how-to-2.png" class="how-to-images" />
       <div class="step-text-container">
         <p class="step-title">Generieren lassen</p>
         <p class="how-to-text">
@@ -23,7 +23,7 @@
     </div>
 
     <div class="steps">
-      <img src="creativity-transparent-2.png" class="how-to-images" />
+      <img src="how-to-3.png" class="how-to-images" />
       <div class="step-text-container">
         <p class="step-title">Challenge annehmen oder neu würfeln</p>
         <p class="how-to-text">
