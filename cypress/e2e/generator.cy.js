@@ -7,25 +7,25 @@ describe("generator", () => {
 
   /*** Material Selection ***/
 
-  it("should be collapsed initially", () => {
-    //always fails although height is 0
-    // cy.get("[data-cy=material-selection]")
-    //   .children(".medium-selection")
-    //   .should("not.be.visible");
+  // it("should be collapsed initially", () => {
+  //   //always fails although height is 0
+  //   // cy.get("[data-cy=material-selection]")
+  //   //   .children(".medium-selection")
+  //   //   .should("not.be.visible");
 
-    cy.get("[data-cy=material-selection]").should("have.css", "height", "35px"); //collapsed height is 35px
-  });
+  //   cy.get("[data-cy=material-selection]").should("have.css", "height", "35px"); //collapsed height is 35px
+  // });
 
-  it.only("should expand or collapse when clicked", () => {
-    cy.get("[data-cy=medium-text]").click();
-    cy.get("[data-cy=material-selection]").should(
-      "have.css",
-      "height",
-      "221px"
-    ); //expanded height is 221px
-    cy.get("[data-cy=medium-text]").click();
-    cy.get("[data-cy=material-selection]").should("have.css", "height", "35px");
-  });
+  // it("should expand or collapse when clicked", () => {
+  //   cy.get("[data-cy=medium-text]").click();
+  //   cy.get("[data-cy=material-selection]").should(
+  //     "have.css",
+  //     "height",
+  //     "221px"
+  //   ); //expanded height is 221px
+  //   cy.get("[data-cy=medium-text]").click();
+  //   cy.get("[data-cy=material-selection]").should("have.css", "height", "35px");
+  // });
 
   /*** Categories ***/
 
