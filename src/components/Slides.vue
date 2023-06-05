@@ -3,6 +3,7 @@
     <transition name="fade">
       <img :src="selectedImage" alt="Selected Image" />
     </transition>
+    <h1>Get inspired and expand your drawing skills</h1>
     <div class="indicator-bar">
       <span
         v-for="(image, index) in images"
@@ -11,7 +12,6 @@
         @click="selectImage(index)"
       ></span>
     </div>
-    <p>Get inspired and expand your drawing skills</p>
   </div>
 </template>
 
@@ -40,12 +40,13 @@ function selectImage(index) {
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-bottom: 1.5em;
 }
 
 .indicator-bar {
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  margin: 1.5em;
 }
 
 .indicator-bar span {

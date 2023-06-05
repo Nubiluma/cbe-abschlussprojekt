@@ -7,6 +7,7 @@
     <button @click="navigateToRegister" class="register-in-btn btn">
       Registrieren
     </button>
+    <RouterLink to="/Account">Account </RouterLink>
   </form>
 
   <section class="how-to-section">
@@ -23,6 +24,8 @@
     </span>
     <img src="idea.png" class="how-to-tip-img" />
   </div>
+
+  <RouterView />
 </template>
 
 <script setup>
@@ -30,7 +33,6 @@ import { useRouter } from "vue-router";
 import Slides from "../components/Slides.vue";
 import Generator from "../components/Generator.vue";
 import HowTo from "./../components/HowTo.vue";
-import Account from "../views/Account.vue";
 
 const router = useRouter();
 

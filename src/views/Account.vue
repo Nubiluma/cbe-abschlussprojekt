@@ -11,5 +11,6 @@ getSession();
 
 async function getSession() {
   account.value = await supabase.auth.getSession();
+  console.log(account.value);
 }
 </script>
