@@ -11,6 +11,7 @@
         @click="selectImage(index)"
       ></span>
     </div>
+    <p>Get inspired and expand your drawing skills</p>
   </div>
 </template>
 

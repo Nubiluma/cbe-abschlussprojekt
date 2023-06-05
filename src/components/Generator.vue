@@ -158,7 +158,7 @@
 import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 import { ref } from "vue";
-import { useAppStore } from "../store";
+import { useAppStore } from "../authStore";
 import { items } from "./../items";
 
 /******* variables ********/

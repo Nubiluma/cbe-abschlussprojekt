@@ -23,10 +23,17 @@ const error = ref("");
 // const store = use store();
 
 async function register() {
-  const { data, error } = await supabase.auth.signUp({
-    email: email.value,
-    password: password.value,
-  });
+  const { data, error } = await supabase.auth.signUp(
+    {
+      email,
+      password,
+    },
+    {
+      data: {
+        username,
+      },
+    }
+  );
   if (error) {
     console.log(error);
   } else {

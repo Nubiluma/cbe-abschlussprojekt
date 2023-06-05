@@ -9,7 +9,6 @@
           type="text"
           id="email"
           v-model="email"
-          :value="credentials.email"
           required
         />
       </div>
@@ -24,49 +23,44 @@
         />
       </div>
       <button class="login-btn btn" type="submit">Anmelden</button>
+      <button class="login-btn btn">Registrieren</button>
     </form>
-    <p>
-      Noch kein Konto? <router-link to="/Register">Registrieren</router-link>
-    </p>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { supabase } from "../supabase";
 
-const email = ref("");
-const password = ref("");
+const handleSignin = async (event) => {
+  const { email, password } = event.target.elements;
+  console.log(email.value, password.value);
 
-const handleSignin = async () => {
-  try {
-    const { error } = await supabase.auth.signIn({
-      email: email.value,
-      password: password.value,
-    });
-    if (error) throw error;
-  } catch (error) {
-    alert(error.error_description || error.message);
-    return {
-      email,
-      password,
-      handleSignin,
-    };
+  const { user, session, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+  debugger;
+  if (error) {
+    setLMsg(error.message);
+  } else {
+    setLMsg("Login successfully");
+    setUser(data.user);
+    setSession(data.session);
+    console.log(data.session);
   }
 };
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  padding: 2.5em;
+}
 .btn {
   padding: 1em 2em;
   background: var(--clr-purple01);
   color: var(--clr-white);
   border-radius: 40px;
-}
-
-.container {
-  display: flex;
-  padding: 1.5em;
 }
 
 h1 {

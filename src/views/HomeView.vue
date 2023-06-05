@@ -33,7 +33,7 @@ import HowTo from "./../components/HowTo.vue";
 const router = useRouter();
 
 const navigateToLogin = () => {
-  router.push("/LoginForm");
+  router.push("/Login");
 };
 
 const navigateToRegister = () => {
