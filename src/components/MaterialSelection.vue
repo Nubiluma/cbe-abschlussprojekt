@@ -15,6 +15,7 @@
           :id="medium.id"
           :value="medium.text"
           v-model="store.selectedMaterials"
+          @change="updateLocalStorage()"
         />
         <label class="mediums-label" :for="medium.id">{{ medium.text }}</label>
       </div>
@@ -31,6 +32,7 @@
           :id="tool.id"
           :value="tool.text"
           v-model="store.selectedMaterials"
+          @change="updateLocalStorage()"
         />
         <label class="mediums-label" :for="tool.id">{{ tool.text }}</label>
       </div>
@@ -43,6 +45,18 @@ import { useAppStore } from "../authStore";
 defineProps({ media: { String }, tools: { String }, title: String });
 
 const store = useAppStore();
+getDataFromLocalStorage();
+
+function updateLocalStorage() {
+  localStorage.setItem("materials", JSON.stringify(store.selectedMaterials));
+}
+
+function getDataFromLocalStorage() {
+  const materials = localStorage.getItem("materials");
+  if (materials) {
+    store.selectedMaterials = JSON.parse(materials);
+  }
+}
 </script>
 
 <style scoped>

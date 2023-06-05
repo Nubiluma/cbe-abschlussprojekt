@@ -10,6 +10,7 @@ import Account from "../views/Account.vue";
 import Unauthorized from "../views/Unauthorized.vue";
 
 import { supabase } from "../supabase";
+import CopyrightsView from "../views/CopyrightsView.vue";
 
 const routes = [
   { path: "/", component: HomeView },
@@ -26,6 +27,7 @@ const routes = [
     component: Account,
     meta: { requiresAuth: true },
   },
+  { path: "/Copyrights", component: CopyrightsView },
 ];
 
 // 3. Create the router instance and pass the `routes` option

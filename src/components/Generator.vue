@@ -10,7 +10,7 @@
   </section>
   <section class="generator-wrapper">
     <div
-      v-if="Object.keys(generatedChallenge).length === 0"
+      v-if="!isChallengeGenerated()"
       class="categories-container"
       data-cy="categories-container"
     >
@@ -26,7 +26,7 @@
       ></Card>
     </div>
     <div
-      v-if="Object.keys(generatedChallenge).length > 0"
+      v-if="isChallengeGenerated()"
       class="categories-container-challenge-view"
       data-cy="categories-container-challenge-view"
     >
@@ -37,7 +37,7 @@
         :image="category.image"
         :id="category.id"
         :selected="category.selected"
-        :challengeView="Object.keys(generatedChallenge).length > 0"
+        :challengeView="isChallengeGenerated()"
         @rerollValue="handleRerollValue(category.id)"
       >
         <p
@@ -53,7 +53,7 @@
     <div class="challenge-part">
       <div class="challenge-container">
         <div
-          v-if="Object.keys(generatedChallenge).length > 0"
+          v-if="isChallengeGenerated()"
           class="challenge-display"
           data-cy="challenge-display"
         >
@@ -118,23 +118,24 @@
       </div>
       <div class="buttons-container">
         <button
-          v-if="Object.keys(generatedChallenge).length === 0"
+          v-if="!isChallengeGenerated()"
           @click="generateChallenge"
           class="generate-btn generator-buttons"
           data-cy="generate-button"
+          :disabled="selectedCategories.length === 0"
         >
           Generieren
         </button>
         <button
-          v-if="Object.keys(generatedChallenge).length > 0"
+          v-if="isChallengeGenerated()"
           @click="acceptChallenge"
           class="accept-challenge-btn generator-buttons"
           data-cy="accept-button"
         >
-          Challenge annehmen
+          {{ challengeButtonText }}
         </button>
         <button
-          v-if="Object.keys(generatedChallenge).length > 0"
+          v-if="isChallengeGenerated()"
           @click="generateChallenge"
           class="re-generate-btn generator-buttons"
           data-cy="re-generate-button"
@@ -142,7 +143,7 @@
           Alle neu würfeln
         </button>
         <p
-          v-if="Object.keys(generatedChallenge).length > 0"
+          v-if="isChallengeGenerated()"
           @click="reset"
           class="back-to-categories"
           data-cy="back-button"
@@ -158,15 +159,17 @@
 import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 import { ref } from "vue";
-import { useAppStore } from "../authStore";
+import { useAppStore, useToastStore } from "../authStore";
+
 import { items } from "./../items";
 
 /******* variables ********/
 
 const store = useAppStore();
+const toast = useToastStore();
 
 const categories = ref([
-  { text: "Stil", image: "/style-icon.png", id: "style", selected: false },
+  { text: "Stil", image: "/style-icon.jpg", id: "style", selected: false },
   {
     text: "Motiv",
     image: "/theme-icon.jpg",
@@ -202,14 +205,10 @@ const selectedCategories = ref([]);
 //contains 1 object if user generates challenge, otherwise it will be empty
 let generatedChallenge = ref({});
 
-const selectionMedium = [
-  { text: "Papier/Leinwand", id: "canvas" },
-  { text: "Digitales Medium", id: "digital" },
-];
+const selectionMedium = [{ text: "Digitales Medium", id: "digital" }];
 
 const selectionTools = [
-  { text: "Bleistifte", id: "pencil" },
-  { text: "Buntstifte", id: "crayon" },
+  { text: "Stifte", id: "pencil" },
   { text: "Marker", id: "marker" },
   { text: "Acrylfarben", id: "brush" },
   { text: "Aquarelle", id: "aquarels" },
@@ -220,6 +219,8 @@ const selectionTools = [
   { text: "Spachtel", id: "spatula" },
   { text: "Schwamm", id: "sponge" },
 ];
+
+let challengeButtonText = ref("Challenge annehmen");
 
 /******* functions ********/
 
@@ -237,6 +238,13 @@ function cardChallengeText(category) {
 }
 
 /**
+ * @returns true if challenge has been generated (important for rendering)
+ */
+function isChallengeGenerated() {
+  return Object.keys(generatedChallenge.value).length > 0;
+}
+
+/**
  * toggle selected value of category and update selectedCategories
  * themeCategory and characterCategory cannot be selected at the same time
  * @param {Object} category
@@ -250,11 +258,12 @@ function selectCategory(category) {
  * generate challenge object depending on selected categories and materials
  */
 function generateChallenge() {
+  const categoryIdIndex = 2;
   if (selectedCategories.value.length > 0) {
     const categoryKeys = [];
     selectedCategories.value.forEach((e) => {
       const values = Object.values(e);
-      categoryKeys.push(values[2]);
+      categoryKeys.push(values[categoryIdIndex]);
     });
     generateRandomValues(categoryKeys);
   } else {
@@ -293,7 +302,7 @@ function generateRandomValues(categoryKeys) {
   }
 
   if (categoryKeys.includes("technique")) {
-    const techniqueItems = items.technique;
+    const techniqueItems = structuredClone(items.technique);
     let filteredItems = {};
 
     const selectionToolsTexts = [];
@@ -304,11 +313,12 @@ function generateRandomValues(categoryKeys) {
     //remove materials that are not selected (in store)
     //delete keys bound to a material (e.g. Acryl/Digital) that is not in store
     for (let key in techniqueItems) {
-      if (!store.selectedMaterials.includes(key)) {
+      if (!store.selectedMaterials.includes(key) && key != "Pen&Paper") {
         delete techniqueItems[key];
       }
     }
     filteredItems = Object.assign(filteredItems, techniqueItems);
+    console.log(filteredItems);
     for (let key in techniqueItems) {
       for (let i = 0; i < techniqueItems[key].length; i++) {
         const isTool = selectionToolsTexts.includes(techniqueItems[key][i]);
@@ -354,8 +364,8 @@ function generateRandomValues(categoryKeys) {
 function acceptChallenge() {
   if (Object.keys(generatedChallenge.value).length > 0) {
     store.challenges.push(generatedChallenge.value);
+    toast.showMessage("Du hast die Challlenge angenommen!");
     reset();
-    console.log(store.challenges);
   }
 }
 
@@ -533,5 +543,11 @@ details {
   font-size: 3rem;
   line-height: 3rem;
   z-index: 1;
+}
+
+.generate-btn:disabled {
+  cursor: auto;
+  opacity: 50%;
+  filter: grayscale();
 }
 </style>
