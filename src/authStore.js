@@ -28,6 +28,7 @@ export const useAuthStore = defineStore("authStore", () => {
     });
     console.log(data);
   };
+
   return { login, user, isLoggedIn };
 });
 

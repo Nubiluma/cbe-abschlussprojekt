@@ -24,31 +24,63 @@
       </div>
       <button class="login-btn btn" type="submit">Anmelden</button>
       <button class="login-btn btn">Registrieren</button>
+      <button @click="setCurrentUser" class="login-btn btn">
+        See who is logged in
+      </button>
+      <button @click="logout" class="login-btn btn">Logout</button>
     </form>
   </div>
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { supabase } from "../supabase";
+import { useAuthStore } from "../authStore";
+import router from "../router";
 
-const handleSignin = async (event) => {
-  const { email, password } = event.target.elements;
-  console.log(email.value, password.value);
+const { isLoggedIn } = useAuthStore();
 
-  const { user, session, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
+const email = ref("");
+const password = ref("");
+
+async function handleSignin() {
+  const signInResult = await supabase.auth.signInWithPassword({
+    email: email.value,
+    password: password.value,
   });
-  debugger;
-  if (error) {
-    setLMsg(error.message);
-  } else {
-    setLMsg("Login successfully");
-    setUser(data.user);
-    setSession(data.session);
-    console.log(data.session);
+
+  if (signInResult.error) {
+    console.log("Error while login");
+    isLoggedIn.value = false;
   }
-};
+
+  if (signInResult.data.user && signInResult.data.session) {
+    console.log("Erfolgreich eingeloggt");
+    isLoggedIn.value = true;
+  } else {
+    console.log("Kein Error, aber kein User und keine Session");
+    isLoggedIn.value = false;
+  }
+}
+
+// async function seeAccountPage() {
+//   router.push("../views/Account.vue");
+// }
+
+async function setCurrentUser() {
+  const localUser = await supabase.auth.getSession();
+  console.log(localUser);
+}
+
+async function logout() {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Logout was successful");
+  }
+}
 </script>
 
 <style scoped>

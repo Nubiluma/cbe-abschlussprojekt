@@ -8,6 +8,7 @@
       Registrieren
     </button>
   </form>
+
   <section class="how-to-section">
     <HowTo></HowTo>
   </section>
@@ -29,6 +30,7 @@ import { useRouter } from "vue-router";
 import Slides from "../components/Slides.vue";
 import Generator from "../components/Generator.vue";
 import HowTo from "./../components/HowTo.vue";
+import Account from "../views/Account.vue";
 
 const router = useRouter();
 
