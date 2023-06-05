@@ -208,8 +208,7 @@ let generatedChallenge = ref({});
 const selectionMedium = [{ text: "Digitales Medium", id: "digital" }];
 
 const selectionTools = [
-  { text: "Bleistifte", id: "pencil" },
-  { text: "Buntstifte", id: "crayon" },
+  { text: "Stifte", id: "pencil" },
   { text: "Marker", id: "marker" },
   { text: "Acrylfarben", id: "brush" },
   { text: "Aquarelle", id: "aquarels" },

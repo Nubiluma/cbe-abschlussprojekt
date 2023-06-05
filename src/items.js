@@ -3,6 +3,7 @@ export const items = {
     "Quick Sketch",
     "Cartoon",
     "Detailliert",
+    "Surrealistisch",
     "Realistisch",
     "Simpel",
     "Abstrakt",
@@ -89,8 +90,7 @@ export const items = {
       "Beliebige Technik",
     ],
     "Pen&Paper": [
-      "Bleistifte",
-      "Buntstifte",
+      "Stifte",
       "Kohlestifte",
       "Marker",
       "Pastellkreide",
