@@ -35,7 +35,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { useToastStore } from "./store";
+import { useToastStore } from "./authStore";
 
 const router = useRouter();
 const store = useToastStore();
