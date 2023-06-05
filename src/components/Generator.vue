@@ -121,8 +121,8 @@
           v-if="!isChallengeGenerated()"
           @click="generateChallenge"
           class="generate-btn generator-buttons"
-          :class="{ disabled: selectedCategories.length === 0 }"
           data-cy="generate-button"
+          :disabled="selectedCategories.length === 0"
         >
           Generieren
         </button>
@@ -159,12 +159,14 @@
 import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 import { ref } from "vue";
-import { useAppStore } from "../store";
+import { useAppStore, useToastStore } from "../store";
+
 import { items } from "./../items";
 
 /******* variables ********/
 
 const store = useAppStore();
+const toast = useToastStore();
 
 const categories = ref([
   { text: "Stil", image: "/style-icon.jpg", id: "style", selected: false },
@@ -301,7 +303,7 @@ function generateRandomValues(categoryKeys) {
   }
 
   if (categoryKeys.includes("technique")) {
-    const techniqueItems = items.technique;
+    const techniqueItems = structuredClone(items.technique);
     let filteredItems = {};
 
     const selectionToolsTexts = [];
@@ -363,13 +365,8 @@ function generateRandomValues(categoryKeys) {
 function acceptChallenge() {
   if (Object.keys(generatedChallenge.value).length > 0) {
     store.challenges.push(generatedChallenge.value);
-    challengeButtonText.value = "Du hast die Challenge angenommen!";
-    setTimeout(() => {
-      reset();
-      challengeButtonText.value = "Challenge annehmen";
-    }, 2000);
-
-    //console.log(store.challenges);
+    toast.showMessage("Du hast die Challlenge angenommen!");
+    reset();
   }
 }
 
@@ -549,7 +546,7 @@ details {
   z-index: 1;
 }
 
-.disabled {
+.generate-btn:disabled {
   cursor: auto;
   opacity: 50%;
   filter: grayscale();

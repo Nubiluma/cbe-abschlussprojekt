@@ -1,7 +1,7 @@
 <template>
   <h1>Copyrights</h1>
   <div class="links-container">
-    <a v-for="link in links" :key="link" :href="link.link">
+    <a v-for="link in links" :key="link" :href="link.link" target="_blank">
       <img :src="link.image" alt=""
     /></a>
   </div>

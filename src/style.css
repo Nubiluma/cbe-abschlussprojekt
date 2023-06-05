@@ -20,6 +20,7 @@ html {
   --clr-white: #ffffff;
   --shadow-clr: #535353;
   --clr-light-grey: #d9d9d999;
+  --clr-light-green: rgb(107, 164, 107);
   --slides-img-height: 35rem;
   --how-to-img-height: 40rem;
 }
