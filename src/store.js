@@ -5,14 +5,22 @@ import { ref } from "vue";
 export const pinia = createPinia();
 
 export const useAppStore = defineStore("app", () => {
-  const selectedMaterials = ref([
-    "Digitales Medium",
-    "Marker",
-    "Schwamm",
-    "Acrylfarben",
-    "Pen&Paper",
-  ]);
-
+  const selectedMaterials = ref([]);
   const challenges = ref([]);
+
   return { selectedMaterials, challenges };
+});
+
+export const useToastStore = defineStore("toast", {
+  state: () => ({
+    toastMsg: "",
+  }),
+  actions: {
+    showMessage(msg) {
+      this.toastMsg = msg;
+      setTimeout(() => {
+        this.toastMsg = "";
+      }, 5000);
+    },
+  },
 });

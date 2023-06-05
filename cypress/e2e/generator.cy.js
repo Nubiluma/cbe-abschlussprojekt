@@ -69,6 +69,16 @@ describe("generator", () => {
     cy.get("[data-cy=back-button]").should("not.exist");
   });
 
+  it("should be disabled when nothing is selected", () => {
+    cy.get("[data-cy=generate-button]").should("be.disabled");
+
+    cy.get("[data-cy=categories-container]").children().first().click();
+    cy.get("[data-cy=generate-button]").should("be.enabled");
+
+    cy.get("[data-cy=categories-container]").children().first().click();
+    cy.get("[data-cy=generate-button]").should("be.disabled");
+  });
+
   it("should not show challenge", () => {
     cy.get("[data-cy=challenge-display]").should("not.exist");
   });

@@ -5,6 +5,9 @@
   </header>
   <main>
     <RouterView />
+    <div class="toast" v-if="store.toastMsg.length > 0">
+      {{ store.toastMsg }}
+    </div>
   </main>
   <footer>
     <p class="credits">App by Tanja & Sandra</p>
@@ -32,8 +35,10 @@
 
 <script setup>
 import { useRouter } from "vue-router";
+import { useToastStore } from "./store";
 
 const router = useRouter();
+const store = useToastStore();
 
 const navigateToCopyrights = () => {
   router.push("/Copyrights");
@@ -49,5 +54,18 @@ const navigateToCopyrights = () => {
 
 a {
   margin-inline: 1rem;
+}
+
+.toast {
+  font-size: 3rem;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  padding: 1em;
+  border-radius: 2rem 0 0 2rem;
+  position: fixed;
+  top: 3rem;
+  right: 0;
+  background-color: var(--clr-light-green);
 }
 </style>

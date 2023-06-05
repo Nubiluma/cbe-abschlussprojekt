@@ -37,7 +37,7 @@
         :image="category.image"
         :id="category.id"
         :selected="category.selected"
-        :challengeView="Object.keys(generatedChallenge).length > 0"
+        :challengeView="isChallengeGenerated()"
         @rerollValue="handleRerollValue(category.id)"
       >
         <p
@@ -122,6 +122,7 @@
           @click="generateChallenge"
           class="generate-btn generator-buttons"
           data-cy="generate-button"
+          :disabled="selectedCategories.length === 0"
         >
           Generieren
         </button>
@@ -158,12 +159,14 @@
 import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 import { ref } from "vue";
-import { useAppStore } from "../store";
+import { useAppStore, useToastStore } from "../store";
+
 import { items } from "./../items";
 
 /******* variables ********/
 
 const store = useAppStore();
+const toast = useToastStore();
 
 const categories = ref([
   { text: "Stil", image: "/style-icon.jpg", id: "style", selected: false },
@@ -202,14 +205,10 @@ const selectedCategories = ref([]);
 //contains 1 object if user generates challenge, otherwise it will be empty
 let generatedChallenge = ref({});
 
-const selectionMedium = [
-  { text: "Papier/Leinwand", id: "canvas" },
-  { text: "Digitales Medium", id: "digital" },
-];
+const selectionMedium = [{ text: "Digitales Medium", id: "digital" }];
 
 const selectionTools = [
-  { text: "Bleistifte", id: "pencil" },
-  { text: "Buntstifte", id: "crayon" },
+  { text: "Stifte", id: "pencil" },
   { text: "Marker", id: "marker" },
   { text: "Acrylfarben", id: "brush" },
   { text: "Aquarelle", id: "aquarels" },
@@ -238,6 +237,9 @@ function cardChallengeText(category) {
   }
 }
 
+/**
+ * @returns true if challenge has been generated (important for rendering)
+ */
 function isChallengeGenerated() {
   return Object.keys(generatedChallenge.value).length > 0;
 }
@@ -300,7 +302,7 @@ function generateRandomValues(categoryKeys) {
   }
 
   if (categoryKeys.includes("technique")) {
-    const techniqueItems = items.technique;
+    const techniqueItems = structuredClone(items.technique);
     let filteredItems = {};
 
     const selectionToolsTexts = [];
@@ -311,11 +313,12 @@ function generateRandomValues(categoryKeys) {
     //remove materials that are not selected (in store)
     //delete keys bound to a material (e.g. Acryl/Digital) that is not in store
     for (let key in techniqueItems) {
-      if (!store.selectedMaterials.includes(key)) {
+      if (!store.selectedMaterials.includes(key) && key != "Pen&Paper") {
         delete techniqueItems[key];
       }
     }
     filteredItems = Object.assign(filteredItems, techniqueItems);
+    console.log(filteredItems);
     for (let key in techniqueItems) {
       for (let i = 0; i < techniqueItems[key].length; i++) {
         const isTool = selectionToolsTexts.includes(techniqueItems[key][i]);
@@ -361,13 +364,8 @@ function generateRandomValues(categoryKeys) {
 function acceptChallenge() {
   if (Object.keys(generatedChallenge.value).length > 0) {
     store.challenges.push(generatedChallenge.value);
-    challengeButtonText.value = "Du hast die Challenge angenommen!";
-    setTimeout(() => {
-      reset();
-      challengeButtonText.value = "Challenge annehmen";
-    }, 2000);
-
-    //console.log(store.challenges);
+    toast.showMessage("Du hast die Challlenge angenommen!");
+    reset();
   }
 }
 
@@ -545,5 +543,11 @@ details {
   font-size: 3rem;
   line-height: 3rem;
   z-index: 1;
+}
+
+.generate-btn:disabled {
+  cursor: auto;
+  opacity: 50%;
+  filter: grayscale();
 }
 </style>

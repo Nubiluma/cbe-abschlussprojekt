@@ -8,6 +8,10 @@ export const copyrights = [
     image: "slide-1-transparent.png",
   },
   {
+    link: "https://www.freepik.com/free-vector/architect-concept-illustration_10042065.htm#query=industrial%20designer&position=9&from_view=keyword&track=ais",
+    image: "slide-2-transparent.png",
+  },
+  {
     link: "https://de.freepik.com/vektoren-kostenlos/kuenstler-malen-abstraktes-bild-mit-pinsel-und-oelfarbe-arbeit-von-kleinen-personen-beim-zeichnen-mit-flachen-vektorillustrationen-der-digitalen-werkzeuge-virtuelle-meisterklasse-online-workshop-kreationskonzept_22343414.htm#query=draw&position=18&from_view=search&track=location_fest_v1",
     image: "slide-3-transparent.png",
   },
