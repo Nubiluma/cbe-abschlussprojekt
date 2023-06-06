@@ -1,7 +1,6 @@
 <template>
-  <!-- <section class="slides-section"> -->
   <Slides></Slides>
-  <!-- </section> -->
+
   <form class="login-form">
     <button @click="navigateToLogin" class="login-btn btn">Anmelden</button>
     <button @click="navigateToRegister" class="register-in-btn btn">

@@ -3,7 +3,6 @@
     <transition name="fade">
       <img :src="selectedImage" alt="Selected Image" />
     </transition>
-    <h1>Get inspired and expand your drawing skills</h1>
     <div class="indicator-bar">
       <span
         v-for="(image, index) in images"
@@ -16,7 +15,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 
 const images = ref([
   "/slide-1-transparent.png",
@@ -25,12 +24,35 @@ const images = ref([
 ]);
 
 const selectedIndex = ref(0);
+const autoInterval = ref(null);
 
 const selectedImage = computed(() => images.value[selectedIndex.value]);
 
 function selectImage(index) {
   selectedIndex.value = index;
 }
+
+function startAutoCarousel() {
+  autoInterval.value = setInterval(() => {
+    nextImage();
+  }, 3000);
+}
+
+function stopAutoCarousel() {
+  clearInterval(autoInterval.value);
+}
+
+function nextImage() {
+  selectedIndex.value = (selectedIndex.value + 1) % images.value.length;
+}
+
+onMounted(() => {
+  startAutoCarousel();
+});
+
+onUnmounted(() => {
+  stopAutoCarousel();
+});
 </script>
 
 <style scoped>
@@ -40,13 +62,12 @@ function selectImage(index) {
   align-items: center;
   justify-content: center;
   position: relative;
-  margin-bottom: 1.5em;
 }
 
 .indicator-bar {
   display: flex;
   justify-content: center;
-  margin: 1.5em;
+  margin-bottom: 10px;
 }
 
 .indicator-bar span {
