@@ -361,13 +361,29 @@ function generateRandomValues(categoryKeys) {
 
 /**
  * save not empty generated challenge to store
+ * TEMPORARY: save challenge to local storage
+ * TODO: save challenge to db
  */
 function acceptChallenge() {
   if (Object.keys(generatedChallenge.value).length > 0) {
     const formatedChallengeObject = formatChallengeObject();
+    getDataFromLocalStorage();
     store.challenges.push(formatedChallengeObject);
     toast.showMessage("Du hast die Challlenge angenommen!");
+    updateLocalStorage();
     reset();
+  }
+}
+
+function updateLocalStorage() {
+  console.log(store.challenges);
+  localStorage.setItem("challenges", JSON.stringify(store.challenges));
+}
+
+function getDataFromLocalStorage() {
+  const challenges = localStorage.getItem("challenges");
+  if (challenges) {
+    store.challenges = JSON.parse(challenges);
   }
 }
 
