@@ -23,11 +23,13 @@
         />
       </div>
       <button class="login-btn btn" type="submit">Login</button>
-      <button class="login-btn btn">Register</button>
       <button @click="setCurrentUser" class="login-btn btn">
         See who is logged in
       </button>
       <button @click="logout" class="login-btn btn">Logout</button>
+      <div class="toast" v-if="toast.toastMsg.length > 0">
+        {{ toast.toastMsg }}
+      </div>
     </form>
   </div>
 </template>
@@ -35,8 +37,8 @@
 <script setup>
 import { ref } from "vue";
 import { supabase } from "../supabase";
-import { useAuthStore } from "../authStore";
-import router from "../router";
+import { useAuthStore, useToastStore } from "../authStore";
+const toast = useToastStore();
 
 const { isLoggedIn } = useAuthStore();
 
@@ -51,21 +53,16 @@ async function handleSignin() {
 
   if (signInResult.error) {
     console.log("Error while login");
-    isLoggedIn.value = false;
+    // isLoggedIn.value = false;
   }
 
   if (signInResult.data.user && signInResult.data.session) {
-    console.log("Erfolgreich eingeloggt");
-    isLoggedIn.value = true;
+    // console.log("Erfolgreich eingeloggt");
+    toast.showMessage("Du bist erfolgreich eingeloggt");
   } else {
     console.log("Kein Error, aber kein User und keine Session");
-    isLoggedIn.value = false;
   }
 }
-
-// async function seeAccountPage() {
-//   router.push("../views/Account.vue");
-// }
 
 async function setCurrentUser() {
   const { data, error } = await supabase.auth.getSession();
@@ -78,7 +75,7 @@ async function logout() {
   if (error) {
     console.log(error);
   } else {
-    console.log("Logout was successful");
+    toast.showMessage("Du bist erfolgreich ausgeloggt");
   }
 }
 </script>

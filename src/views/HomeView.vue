@@ -2,13 +2,12 @@
   <Slides></Slides>
   <form class="login-form">
     <button @click="navigateToRegister" class="register-btn">
-      Get started
+      Registrieren
     </button>
-    <button @click="navigateToLogin" class="login-btn">
-      I already have an Account
-    </button>
-
-    <RouterLink to="/Account">Account </RouterLink>
+    <button @click="navigateToLogin" class="login-btn">Anmelden</button>
+    <RouterLink class="account-link" to="/Account"
+      >zu den Challenges</RouterLink
+    >
   </form>
 
   <section class="how-to-section">
@@ -25,7 +24,6 @@
     </span>
     <img src="idea.png" class="how-to-tip-img" />
   </div>
-
   <RouterView />
 </template>
 
@@ -47,6 +45,10 @@ const navigateToRegister = () => {
 </script>
 
 <style scoped>
+.account-link {
+  font-size: 1.5rem;
+}
+
 .login-btn {
   display: block;
   width: 13em;
