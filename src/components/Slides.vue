@@ -3,6 +3,9 @@
     <transition name="fade">
       <img :src="selectedImage" alt="Selected Image" />
     </transition>
+    <div class="carousel-text">
+      <span>{{ selectedText }}</span>
+    </div>
     <div class="indicator-bar">
       <span
         v-for="(image, index) in images"
@@ -23,10 +26,17 @@ const images = ref([
   "/slide-3-transparent.png",
 ]);
 
+const texts = ref([
+  "Get inspired and expand your drawing skills",
+  "Take a challenge to improve your drawing skills",
+  "Never be bored again when drawing",
+]);
+
 const selectedIndex = ref(0);
 const autoInterval = ref(null);
 
 const selectedImage = computed(() => images.value[selectedIndex.value]);
+const selectedText = computed(() => texts.value[selectedIndex.value]);
 
 function selectImage(index) {
   selectedIndex.value = index;
@@ -64,10 +74,15 @@ onUnmounted(() => {
   position: relative;
 }
 
+.carousel-text span {
+  font-size: 2.5rem;
+  margin-bottom: 1em;
+}
+
 .indicator-bar {
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  margin: 10px;
 }
 
 .indicator-bar span {
@@ -85,6 +100,12 @@ onUnmounted(() => {
 
 img {
   width: var(--slides-img-height);
+}
+
+.carousel-text {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: center;
 }
 
 .fade-enter-active,

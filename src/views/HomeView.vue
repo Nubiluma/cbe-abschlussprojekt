@@ -1,11 +1,13 @@
 <template>
   <Slides></Slides>
-
   <form class="login-form">
-    <button @click="navigateToLogin" class="login-btn btn">Anmelden</button>
-    <button @click="navigateToRegister" class="register-in-btn btn">
-      Registrieren
+    <button @click="navigateToRegister" class="register-btn">
+      Get started
     </button>
+    <button @click="navigateToLogin" class="login-btn">
+      I already have an Account
+    </button>
+
     <RouterLink to="/Account">Account </RouterLink>
   </form>
 
@@ -45,23 +47,24 @@ const navigateToRegister = () => {
 </script>
 
 <style scoped>
-button {
-  margin-bottom: 1em;
-}
 .login-btn {
-  padding: 1.5rem 5rem;
+  display: block;
+  width: 13em;
+  height: 3em;
   background-color: var(--clr-purple01);
   border-radius: 0.8em;
   color: var(--clr-white);
   font-size: 2rem;
 }
 
-.register-in-btn {
-  padding: 1.5rem 5rem;
+.register-btn {
+  display: block;
+  width: 13em;
+  height: 3em;
   background-color: var(--clr-purple02);
   border-radius: 0.8em;
   color: var(--clr-white);
   font-size: 2rem;
-  margin-bottom: 1.2em;
+  margin-bottom: 1.5em;
 }
 </style>

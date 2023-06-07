@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Hello there 👋🏼</h1>
     <form @submit.prevent="handleSignin">
-      <div>
+      <div class="user-box">
         <label for="email">eMail Adresse:</label>
         <input
           class="input-email"
@@ -12,7 +12,7 @@
           required
         />
       </div>
-      <div>
+      <div class="user-box">
         <label for="password">Passwort:</label>
         <input
           class="input-pw"
@@ -22,8 +22,8 @@
           required
         />
       </div>
-      <button class="login-btn btn" type="submit">Anmelden</button>
-      <button class="login-btn btn">Registrieren</button>
+      <button class="login-btn btn" type="submit">Login</button>
+      <button class="login-btn btn">Register</button>
       <button @click="setCurrentUser" class="login-btn btn">
         See who is logged in
       </button>
@@ -68,8 +68,8 @@ async function handleSignin() {
 // }
 
 async function setCurrentUser() {
-  const localUser = await supabase.auth.getSession();
-  console.log(localUser);
+  const { data, error } = await supabase.auth.getSession();
+  console.log(data, error);
 }
 
 async function logout() {
@@ -84,19 +84,16 @@ async function logout() {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  padding: 2.5em;
-}
 .btn {
   padding: 1em 2em;
+  margin: 1.5em;
   background: var(--clr-purple01);
   color: var(--clr-white);
   border-radius: 40px;
 }
 
 h1 {
-  margin-bottom: 1em;
+  margin: 1.5em;
   font-size: 3em;
 }
 
@@ -105,9 +102,10 @@ label {
 }
 
 input {
-  padding: 10px;
+  display: flex;
   border: 0;
-  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.5em;
 }
 
 .container {
@@ -116,7 +114,11 @@ input {
   justify-content: space-around;
   align-items: center;
 }
-.pw-input {
-  padding: 1.5rem 3rem;
+.input-pw {
+  padding: 1.5rem;
+}
+
+.input-email {
+  padding: 1.5rem;
 }
 </style>
