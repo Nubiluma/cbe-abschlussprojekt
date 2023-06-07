@@ -318,7 +318,6 @@ function generateRandomValues(categoryKeys) {
       }
     }
     filteredItems = Object.assign(filteredItems, techniqueItems);
-    console.log(filteredItems);
     for (let key in techniqueItems) {
       for (let i = 0; i < techniqueItems[key].length; i++) {
         const isTool = selectionToolsTexts.includes(techniqueItems[key][i]);
@@ -356,6 +355,8 @@ function generateRandomValues(categoryKeys) {
     );
     generatedChallenge.value.Hintergrund = items.background[randomValueIndex];
   }
+
+  //console.log(generatedChallenge.value);
 }
 
 /**
@@ -363,10 +364,30 @@ function generateRandomValues(categoryKeys) {
  */
 function acceptChallenge() {
   if (Object.keys(generatedChallenge.value).length > 0) {
-    store.challenges.push(generatedChallenge.value);
+    const formatedChallengeObject = formatChallengeObject();
+    store.challenges.push(formatedChallengeObject);
     toast.showMessage("Du hast die Challlenge angenommen!");
     reset();
   }
+}
+
+/**
+ * format generatedChallenge object for store
+ */
+function formatChallengeObject() {
+  let formatedChallengeObject = {
+    Stil: "",
+    Motiv: "",
+    Hintergrund: "",
+    Genre: "",
+    Farbgebung: "",
+    Technik: "",
+  };
+  for (let key in generatedChallenge.value) {
+    formatedChallengeObject[key] = generatedChallenge.value[key];
+  }
+
+  return formatedChallengeObject;
 }
 
 /**
