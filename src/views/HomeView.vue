@@ -64,4 +64,8 @@ const navigateToRegister = () => {
 .login-form {
   margin-block: 5rem;
 }
+
+.buttons:hover {
+  transform: scale(102%);
+}
 </style>

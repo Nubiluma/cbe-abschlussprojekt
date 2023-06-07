@@ -144,7 +144,3 @@ button {
   width: 42rem;
   cursor: pointer;
 }
-
-.buttons:hover {
-  transform: scale(102%);
-}
