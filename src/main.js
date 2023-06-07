@@ -3,7 +3,7 @@ import App from "./App.vue";
 import { Transition } from "vue";
 
 import router from "./router";
-import { pinia } from "./store";
+import { pinia } from "./authStore";
 
 import "./style.css";
 

@@ -28,9 +28,9 @@ async function register() {
     password: password.value,
   });
   if (error) {
-    console.log(error);
+    console.log("Fehler beim signUp", error);
   } else {
-    console.log(data);
+    console.log("Erfolgreich registriert", data);
   }
 }
 </script>

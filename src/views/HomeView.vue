@@ -1,13 +1,16 @@
 <template>
-  <!-- <section class="slides-section"> -->
   <Slides></Slides>
-  <!-- </section> -->
   <form class="login-form">
-    <button @click="navigateToLogin" class="login-btn btn">Anmelden</button>
-    <button @click="navigateToRegister" class="register-in-btn btn">
-      Registrieren
+    <button @click="navigateToRegister" class="register-btn">
+      Get started
     </button>
+    <button @click="navigateToLogin" class="login-btn">
+      I already have an Account
+    </button>
+
+    <RouterLink to="/Account">Account </RouterLink>
   </form>
+
   <section class="how-to-section">
     <HowTo></HowTo>
   </section>
@@ -22,6 +25,8 @@
     </span>
     <img src="idea.png" class="how-to-tip-img" />
   </div>
+
+  <RouterView />
 </template>
 
 <script setup>
@@ -33,7 +38,7 @@ import HowTo from "./../components/HowTo.vue";
 const router = useRouter();
 
 const navigateToLogin = () => {
-  router.push("/LoginForm");
+  router.push("/Login");
 };
 
 const navigateToRegister = () => {
@@ -42,23 +47,24 @@ const navigateToRegister = () => {
 </script>
 
 <style scoped>
-button {
-  margin-bottom: 1em;
-}
 .login-btn {
-  padding: 1.5rem 5rem;
+  display: block;
+  width: 13em;
+  height: 3em;
   background-color: var(--clr-purple01);
   border-radius: 0.8em;
   color: var(--clr-white);
   font-size: 2rem;
 }
 
-.register-in-btn {
-  padding: 1.5rem 5rem;
+.register-btn {
+  display: block;
+  width: 13em;
+  height: 3em;
   background-color: var(--clr-purple02);
   border-radius: 0.8em;
   color: var(--clr-white);
   font-size: 2rem;
-  margin-bottom: 1.2em;
+  margin-bottom: 1.5em;
 }
 </style>

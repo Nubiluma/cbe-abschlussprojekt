@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { useAppStore } from "../store";
+import { useAppStore } from "../authStore";
 defineProps({ media: { String }, tools: { String }, title: String });
 
 const store = useAppStore();

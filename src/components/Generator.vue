@@ -159,7 +159,7 @@
 import MaterialSelection from "./MaterialSelection.vue";
 import Card from "./Card.vue";
 import { ref } from "vue";
-import { useAppStore, useToastStore } from "../store";
+import { useAppStore, useToastStore } from "../authStore";
 
 import { items } from "./../items";
 
