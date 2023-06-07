@@ -120,7 +120,7 @@
         <button
           v-if="!isChallengeGenerated()"
           @click="generateChallenge"
-          class="generate-btn generator-buttons"
+          class="generate-btn buttons"
           data-cy="generate-button"
           :disabled="selectedCategories.length === 0"
         >
@@ -129,7 +129,7 @@
         <button
           v-if="isChallengeGenerated()"
           @click="acceptChallenge"
-          class="accept-challenge-btn generator-buttons"
+          class="accept-challenge-btn buttons"
           data-cy="accept-button"
         >
           {{ challengeButtonText }}
@@ -137,7 +137,7 @@
         <button
           v-if="isChallengeGenerated()"
           @click="generateChallenge"
-          class="re-generate-btn generator-buttons"
+          class="re-generate-btn buttons"
           data-cy="re-generate-button"
         >
           Alle neu würfeln
@@ -525,15 +525,6 @@ details {
   justify-content: center;
   align-items: center;
   gap: 2rem;
-}
-
-.generator-buttons {
-  padding: 2rem;
-  border-style: none;
-  border-radius: 4rem;
-  font-size: 3.5rem;
-  width: 42rem;
-  cursor: pointer;
 }
 
 .generate-btn {

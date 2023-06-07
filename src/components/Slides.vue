@@ -27,9 +27,9 @@ const images = ref([
 ]);
 
 const texts = ref([
-  "Get inspired and expand your drawing skills",
-  "Take a challenge to improve your drawing skills",
-  "Never be bored again when drawing",
+  "Lasse dich inspirieren und erweitere deine zeichnerischen Fähigkeiten",
+  "Nimm die Herausforderung an, um deine Fähigkeiten zu verbessern",
+  "Habe nie wieder Langeweile beim Zeichnen",
 ]);
 
 const selectedIndex = ref(0);

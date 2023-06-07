@@ -132,31 +132,19 @@ button {
   margin-inline: 0;
 }
 
-/** not yet implemented */
-.how-to-tip {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin: 3rem;
-  margin-left: auto;
-  font-size: 2rem;
-  width: 50rem;
-
-  display: none;
-}
-
-.how-to-tip-text {
-  background-color: var(--clr-white);
-  box-shadow: 0.2rem 0.2rem 0.5rem var(--shadow-clr);
-  text-align: center;
-  padding: 1rem;
-}
-
-.how-to-tip-img {
-  width: 8rem;
-}
-
 .generator-section {
   margin: 0 auto;
+}
+
+.buttons {
+  padding: 2rem;
+  border-style: none;
+  border-radius: 4rem;
+  font-size: 3.5rem;
+  width: 42rem;
+  cursor: pointer;
+}
+
+.buttons:hover {
+  transform: scale(102%);
 }

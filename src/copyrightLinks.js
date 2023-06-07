@@ -59,4 +59,8 @@ export const copyrights = [
     link: "https://www.flaticon.com/free-icon/house-black-silhouette-without-door_20176",
     image: "home.png",
   },
+  {
+    link: "https://www.flaticon.com/free-icon/user_1144760?term=profil&page=1&position=2&origin=search&related_id=1144760",
+    image: "user.png",
+  },
 ];

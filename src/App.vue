@@ -23,13 +23,21 @@
           alt="coding bootcamps europe icon"
         />
       </a>
-      <a href="https://github.com/Nubiluma/cbe-abschlussprojekt"
+      <a href="https://github.com/Nubiluma/cbe-abschlussprojekt" target="_blank"
         ><img class="icon" src="github.png" alt="github icon"
       /></a>
     </div>
-    <button @click="navigateToCopyrights" class="copyrights-link">
-      - Copyrights -
-    </button>
+    <div class="link-container">
+      <span></span>
+      <button @click="navigateToCopyrights" class="copyrights-link">
+        - Copyrights -
+      </button>
+      <div class="profile">
+        <RouterLink to="/Account"
+          ><img class="icon" src="user.png" alt="user profile"
+        /></RouterLink>
+      </div>
+    </div>
   </footer>
 </template>
 
@@ -49,11 +57,26 @@ const navigateToCopyrights = () => {
 .icon {
   height: 4rem;
   cursor: pointer;
-  margin-block: 1.25rem 0.25rem;
+  margin-top: 1rem;
 }
 
 a {
   margin-inline: 1rem;
+}
+
+.link-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  width: 100%;
+}
+
+.profile {
+  _position: fixed;
+  _bottom: 1rem;
+  _right: 1rem;
+  _width: 4rem;
+  display: flex;
+  justify-content: end;
 }
 
 .toast {
