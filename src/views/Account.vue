@@ -2,7 +2,11 @@
   <h1>Sie sind eingeloggt als {{ account.data.session.user.email }}</h1>
   <section class="challenges-section">
     <h2>Deine Challenges:</h2>
-    <div class="challenges-container">
+    <p class="notice" v-if="store.challenges.length === 0">
+      Du hast noch keine Challenges angenommen. Lass dir welche vom Generator
+      erstellen!
+    </p>
+    <div v-if="store.challenges.length > 0" class="challenges-container">
       <p class="head">
         <span>Stil</span>
         <span>Motiv</span>
@@ -34,8 +38,6 @@ const store = useAppStore();
 const account = ref();
 getSession();
 
-console.log(store.challenges);
-
 async function getSession() {
   account.value = await supabase.auth.getSession();
 }
@@ -49,6 +51,13 @@ h1 {
 h2 {
   margin-block: 2rem 1rem;
   font-size: 3rem;
+}
+
+.notice {
+  margin-block: 3rem;
+  font-size: 2rem;
+  color: rgb(91, 91, 91);
+  font-style: italic;
 }
 
 .challenges-container {

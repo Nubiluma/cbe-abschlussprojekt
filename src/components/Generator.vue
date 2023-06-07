@@ -280,22 +280,16 @@ function generateRandomValues(categoryKeys) {
   if (categoryKeys.includes("style")) {
     const randomValueIndex = Math.floor(Math.random() * items.style.length);
     generatedChallenge.value.Stil = items.style[randomValueIndex];
-  } else {
-    generatedChallenge.value.Stil = "";
   }
   if (categoryKeys.includes("genre")) {
     const randomValueIndex = Math.floor(Math.random() * items.genre.length);
     generatedChallenge.value.Genre = items.genre[randomValueIndex];
-  } else {
-    generatedChallenge.value.Genre = "";
   }
   if (categoryKeys.includes("coloration")) {
     const randomValueIndex = Math.floor(
       Math.random() * items.coloration.length
     );
     generatedChallenge.value.Farbgebung = items.coloration[randomValueIndex];
-  } else {
-    generatedChallenge.value.Farbgebung = "";
   }
   if (categoryKeys.includes("theme")) {
     const themeValues = Object.values(items.theme);
@@ -305,8 +299,6 @@ function generateRandomValues(categoryKeys) {
     );
     generatedChallenge.value.Motiv =
       themeValues[randomArrayIndex][randomValueIndex];
-  } else {
-    generatedChallenge.value.Motiv = "";
   }
 
   if (categoryKeys.includes("technique")) {
@@ -355,8 +347,6 @@ function generateRandomValues(categoryKeys) {
 
     generatedChallenge.value.Technik =
       filteredItems[randomKey][randomValueIndex] + " (" + randomKey + ")";
-  } else {
-    generatedChallenge.value.Technik = "";
   }
 
   if (categoryKeys.includes("background")) {
@@ -364,11 +354,9 @@ function generateRandomValues(categoryKeys) {
       Math.random() * items.background.length
     );
     generatedChallenge.value.Hintergrund = items.background[randomValueIndex];
-  } else {
-    generatedChallenge.value.Hintergrund = "";
   }
 
-  console.log(generatedChallenge.value);
+  //console.log(generatedChallenge.value);
 }
 
 /**
@@ -376,17 +364,30 @@ function generateRandomValues(categoryKeys) {
  */
 function acceptChallenge() {
   if (Object.keys(generatedChallenge.value).length > 0) {
-    //formatChallengeObject();
-    store.challenges.push(generatedChallenge.value);
+    const formatedChallengeObject = formatChallengeObject();
+    store.challenges.push(formatedChallengeObject);
     toast.showMessage("Du hast die Challlenge angenommen!");
     reset();
   }
 }
 
+/**
+ * format generatedChallenge object for store
+ */
 function formatChallengeObject() {
+  let formatedChallengeObject = {
+    Stil: "",
+    Motiv: "",
+    Hintergrund: "",
+    Genre: "",
+    Farbgebung: "",
+    Technik: "",
+  };
   for (let key in generatedChallenge.value) {
-    console.log(key);
+    formatedChallengeObject[key] = generatedChallenge.value[key];
   }
+
+  return formatedChallengeObject;
 }
 
 /**

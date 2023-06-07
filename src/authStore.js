@@ -8,24 +8,7 @@ export const pinia = createPinia();
 export const useAppStore = defineStore("app", () => {
   const selectedMaterials = ref([]);
 
-  const challenges = ref([
-    {
-      Stil: "Surrealistisch",
-      Genre: "Düster",
-      Farbgebung: "Dunkel",
-      Motiv: "Hase",
-      Technik: "Kohlestifte (Pen&Paper)",
-      Hintergrund: "Fluss",
-    },
-    {
-      Stil: "",
-      Genre: "",
-      Farbgebung: "Dunkel",
-      Motiv: "Hund",
-      Technik: "Kohlestifte (Pen&Paper)",
-      Hintergrund: "Fluss",
-    },
-  ]);
+  const challenges = ref([]);
   return { selectedMaterials, challenges };
 });
 
