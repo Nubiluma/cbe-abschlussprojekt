@@ -26,15 +26,21 @@ export const useToastStore = defineStore("toast", {
   },
 });
 
+// supabase.auth.onAuthStateChange((event, session) => {
+//   console.log(event, session);
+//   user.value = session.value ? session.user : null;
+//   isLoggedIn.value = user.value ? true : false;
+// });
+
 export const useAuthStore = defineStore("authStore", () => {
   const user = ref(null);
   const isLoggedIn = ref(false);
+
   const login = async ({ email, password }) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    return await supabase.auth.signInWithPassword({
       email,
       password,
     });
-    console.log(data);
   };
 
   return { login, user, isLoggedIn };
